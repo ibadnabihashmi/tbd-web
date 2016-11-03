@@ -42,11 +42,12 @@ export function signup(name, email, password) {
     dispatch({
       type: 'CLEAR_MESSAGES'
     });
-    return fetch('/signup', {
+    return fetch('http://localhost:3000/api/user/signup', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: name, email: email, password: password })
     }).then((response) => {
+      console.log(response);
       return response.json().then((json) => {
         if (response.ok) {
           dispatch({

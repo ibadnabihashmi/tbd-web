@@ -47,7 +47,6 @@ export function signup(name, email, password) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: name, email: email, password: password })
     }).then((response) => {
-      console.log(response);
       return response.json().then((json) => {
         if (response.ok) {
           dispatch({

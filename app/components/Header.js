@@ -6,9 +6,6 @@ import { logout } from '../actions/auth';
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    console.log("***HAHAHA****");
-    console.log(props);
-    console.log(this.state);
   }
   handleLogout(event) {
     event.preventDefault();

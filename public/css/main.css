@@ -292,3 +292,9 @@ textarea {
   border:5px dashed grey;
   height: 150px;
 }
+.catalogue-add-btn {
+  border: 1px solid black;
+  padding: 100px 0px;
+  border-radius: 5px;
+  background-color: #efefef;
+}

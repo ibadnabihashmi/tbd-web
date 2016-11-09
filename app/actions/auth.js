@@ -7,7 +7,7 @@ export function login(email, password) {
     dispatch({
       type: 'CLEAR_MESSAGES'
     });
-    return fetch('/login', {
+    return fetch('http://localhost:3000/api/user/login', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

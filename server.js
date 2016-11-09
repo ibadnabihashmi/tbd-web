@@ -45,6 +45,34 @@ app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function(req, res, next) {
+  req.isAuthenticated = function() {
+    var token = (req.headers.authorization && req.headers.authorization.split(' ')[1]) || req.cookies.token;
+    try {
+      return jwt.verify(token, process.env.TOKEN_SECRET);
+    } catch (err) {
+      return false;
+    }
+  };
+
+  if (req.isAuthenticated()) {
+    var payload = req.isAuthenticated();
+    request.get({
+      url:'http://localhost:3000/api/user/checkAuth?id='+payload.sub,
+      json:true
+    },function (err,res) {
+      if(err){
+        console.log(err);
+        next();
+      }else{
+        req.user = res.body.user;
+        next();
+      }
+    });
+  } else {
+    next();
+  }
+});
 
 if (app.get('env') === 'development') {
   app.use(require('webpack-dev-middleware')(compiler, {

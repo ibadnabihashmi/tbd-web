@@ -29,6 +29,7 @@
     "morgan": "*",
     "nodemailer": "*",
     "react": "*",
+    "react-bootstrap": "^0.30.6",
     "react-cookie": "*",
     "react-dom": "*",
     "react-dropzone": "^3.7.2",

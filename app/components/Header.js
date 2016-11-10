@@ -7,6 +7,7 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
   }
+  
   handleLogout(event) {
     event.preventDefault();
     this.props.dispatch(logout());

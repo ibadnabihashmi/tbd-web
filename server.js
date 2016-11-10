@@ -1,20 +1,20 @@
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var compression = require('compression');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var expressValidator = require('express-validator');
-var dotenv = require('dotenv');
-var React = require('react');
-var ReactDOM = require('react-dom/server');
-var Router = require('react-router');
-var Provider = require('react-redux').Provider;
-var jwt = require('jsonwebtoken');
-var moment = require('moment');
-var request = require('request');
-var webpack = require('webpack');
-var config = require('./webpack.config');
+var express           = require('express');
+var path              = require('path');
+var logger            = require('morgan');
+var compression       = require('compression');
+var cookieParser      = require('cookie-parser');
+var bodyParser        = require('body-parser');
+var expressValidator  = require('express-validator');
+var dotenv            = require('dotenv');
+var React             = require('react');
+var ReactDOM          = require('react-dom/server');
+var Router            = require('react-router');
+var Provider          = require('react-redux').Provider;
+var jwt               = require('jsonwebtoken');
+var moment            = require('moment');
+var request           = require('request');
+var webpack           = require('webpack');
+var config            = require('./webpack.config');
 
 // Load environment variables from .env file
 dotenv.load();
@@ -23,16 +23,11 @@ dotenv.load();
 require('babel-core/register');
 require('babel-polyfill');
 
-// Controllers
-var userController = require('./controllers/user');
-
 // React and Server-Side Rendering
-var routes = require('./app/routes');
-var configureStore = require('./app/store/configureStore').default;
-
-var app = express();
-
-var compiler = webpack(config);
+var routes            = require('./app/routes');
+var configureStore    = require('./app/store/configureStore').default;
+var app               = express();
+var compiler          = webpack(config);
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Modal ,Header ,Title ,Footer ,Button ,Body} from 'react-bootstrap';
-import { saveCatalogue } from '../../actions/catalogue';
+import { saveCatalogue ,fetchUserCatalogues } from '../../actions/catalogue';
 
 class Catalogue extends React.Component {
     constructor(props){
@@ -10,8 +10,16 @@ class Catalogue extends React.Component {
             showModal: false,
             catalogueName: '',
             catalogueDesc: '',
-            userId: props.user._id
+            userId: props.user._id,
+            catalogues:[]
         }
+    }
+    componentDidMount(){
+        let result = this.props.dispatch(fetchUserCatalogues(this.state.userId));
+        result.then((json) => {
+            this.setState({catalogues:json.catalogues});
+            this.renderCatalogues();
+        });
     }
     addCatalogue(){
         this.setState({showModal: true});
@@ -20,7 +28,7 @@ class Catalogue extends React.Component {
         this.setState({ [event.target.name]: event.target.value });
     }
     saveCatalogue(){
-        const result = this.props.dispatch(saveCatalogue(
+        let result = this.props.dispatch(saveCatalogue(
             this.state.catalogueName,
             this.state.catalogueDesc,
             this.state.userId
@@ -33,11 +41,34 @@ class Catalogue extends React.Component {
     close(){
         this.setState({showModal: false});
     }
+    renderCatalogues(){
+        let cats = new Array();
+        if(this.state.catalogues.length > 0){
+            this.state.catalogues.forEach((catalogue) => {
+                const link = `/getCatalogue/${catalogue._id}`;
+                cats.push(
+                    <a href={link}>
+                        <div className="col-md-3 text-center catalogue-add-btn">
+                            {catalogue.name}
+                        </div>
+                    </a>
+                );
+            });
+            return cats;
+        }else{
+            return (
+                <div>
+                    <h1>Ponka!</h1>
+                </div>
+            );
+        }
+    }
     render(){
         return(
             <div className="container">
                 <div className="panel">
                     <div className="panel-body">
+                        {this.renderCatalogues()}
                         <a onClick={this.addCatalogue.bind(this)} href="#">
                             <div className="col-md-3 text-center catalogue-add-btn">
                                 add catalogue +

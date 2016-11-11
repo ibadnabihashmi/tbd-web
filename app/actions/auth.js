@@ -23,7 +23,7 @@ export function login(email, password) {
             user: json.user
           });
           cookie.save('token', json.token, { expires: moment().add(1, 'hour').toDate() });
-          browserHistory.push('/account');
+          browserHistory.push('/catalogue');
         });
       } else {
         return response.json().then((json) => {
@@ -54,7 +54,7 @@ export function signup(name, email, password) {
             token: json.token,
             user: json.user
           });
-          browserHistory.push('/');
+          browserHistory.push('/catalogue');
           cookie.save('token', json.token, { expires: moment().add(1, 'hour').toDate() });
         } else {
           dispatch({

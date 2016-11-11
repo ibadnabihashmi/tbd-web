@@ -91,7 +91,7 @@ footer {
 
 .navbar-default .navbar-nav > li > a.navbar-avatar {
   padding-top: 13px;
-  padding-bottom: 10px;
+  padding-bottom: 19px;
 }
 
 .navbar-default .navbar-nav > li > a.navbar-avatar img {
@@ -110,8 +110,10 @@ footer {
 /* ------------------------- */
 
 .panel {
-  border: solid 1px rgba(160, 160, 160, 0.3);
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px !important;
+  background-color: #fff !important;
+  border-radius: 0px !important;
+  border: solid 1px rgb(220, 220, 220) !important;
 }
 
 .panel-heading {
@@ -250,13 +252,19 @@ textarea {
 }
 
 .form-control {
-  height: auto;
-  padding: 8px 12px;
-  border: 2px solid #ebebeb;
-  border-radius: 0;
-  box-shadow: inset 0 1px 2px rgba(150, 160, 175, 0.1), inset 0 1px 15px rgba(150, 160, 175, 0.05);
+  height: auto !important;
+  padding: 8px 12px !important;
+  border: 1px solid #afafaf !important;
+  border-radius: 0 !important;
+  box-shadow: inset 0 1px 2px rgba(150, 160, 175, 0.1), inset 0 1px 15px rgba(150, 160, 175, 0.05) !important;
 }
-
+.form-control:focus {
+  border-color: #000000 !important;
+  border: 2px solid !important;
+  outline: 0 !important;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(95, 95, 95, 0.6) !important;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(97, 97, 97, 0.6) !important;
+}
 .form-group > label {
   text-transform: uppercase;
   font-size: 13px;
@@ -282,19 +290,38 @@ textarea {
   text-transform: uppercase;
 }
 .image-upload-text {
-  font-size: 25px;
+  font-size: 10px;
   text-align: center;
+  justify-content: center;
   vertical-align: middle;
-  line-height: 100px;
+  line-height: 15px;
+  margin-top: 50px;
+  padding: 0px 6px;
 }
 .dropzone {
   width: 100%;
-  border:5px dashed grey;
+  border: 1px dashed grey;
   height: 150px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 .catalogue-add-btn {
   border: 1px solid black;
   padding: 100px 0px;
   border-radius: 5px;
   background-color: #efefef;
+}
+.catalogue-detail {
+  padding: 30px 30px;
+  border-left: 2px solid #989898;
+}
+.tbd-btn {
+  background: white;
+  border: 2px solid black;
+  color: black;
+  border-radius: 0px;
+}
+.tbd-btn:hover {
+  background-color: black;
+  color: white;
 }

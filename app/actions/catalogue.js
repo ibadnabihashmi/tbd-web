@@ -1,3 +1,5 @@
+import request from 'superagent';
+
 export function saveCatalogue(name,description,id) {
     return (dispatch) => {
         dispatch({
@@ -36,5 +38,26 @@ export function fetchUserCatalogues(userId) {
                 return response.json();
             }
         })
+    };
+}
+
+export function updateCatalogue(data) {
+    return (dispatch) => {
+        dispatch({
+            type:'CLEAR_MESSAGES'
+        });
+        return request
+            .post('http://localhost:3000/api/catalogue/update')
+            .field('files',data.catalogueImages)
+            .send({
+                catDesc:data.catalogueDesc,
+                catPrice:data.cataloguePrice,
+                catTags:data.catalogueTags,
+                catName:data.catalogueName,
+                catId:data.catalogueId,
+                userId:data.userId
+            }).end((res) => {
+                return res;
+            });
     };
 }

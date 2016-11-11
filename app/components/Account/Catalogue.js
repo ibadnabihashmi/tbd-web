@@ -35,6 +35,10 @@ class Catalogue extends React.Component {
         ));
         result.then((json) => {
             console.log(json);
+            this.setState({
+                catalogues:this.state.catalogues.concat(new Array(json.catalogue))
+            });
+            this.renderCatalogues();
         });
         this.setState({showModal: false});
     }

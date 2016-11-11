@@ -19,8 +19,7 @@ class Header extends React.Component {
       <ul className="nav navbar-nav navbar-right">
         <li className="dropdown">
           <a href="#" data-toggle="dropdown" className="navbar-avatar dropdown-toggle">
-            <img src={this.props.user.picture || this.props.user.gravatar}/>
-            {' '}{this.props.user.name || this.props.user.email || this.props.user.id}{' '}
+            {this.props.user.name || this.props.user.email || this.props.user.id}{' '}
             <i className="caret"></i>
           </a>
           <ul className="dropdown-menu">
@@ -51,7 +50,7 @@ class Header extends React.Component {
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">
               <li><IndexLink to="/" activeStyle={active}>Home</IndexLink></li>
-              <li><Link to="/contact" activeStyle={active}>Contact</Link></li>
+              <li><Link to="/catalogue" activeStyle={active}>Catalogues</Link></li>
             </ul>
             {rightNav}
           </div>

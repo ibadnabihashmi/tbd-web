@@ -49,15 +49,12 @@ class Signup extends React.Component {
             <form onSubmit={this.handleSignup.bind(this)}>
               <legend>Create an account</legend>
               <div className="form-group">
-                <label htmlFor="name">Name</label>
                 <input type="text" name="name" id="name" placeholder="Name" autoFocus className="form-control" value={this.state.name} onChange={this.handleChange.bind(this)}/>
               </div>
               <div className="form-group">
-                <label htmlFor="email">Email</label>
                 <input type="email" name="email" id="email" placeholder="Email" className="form-control" value={this.state.email} onChange={this.handleChange.bind(this)}/>
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
                 <input type="password" name="password" id="password" placeholder="Password" className="form-control" value={this.state.password} onChange={this.handleChange.bind(this)}/>
               </div>
               <div className="form-group">
@@ -74,7 +71,7 @@ class Signup extends React.Component {
           </div>
         </div>
         <p className="text-center">
-          Already have an account? <Link to="/login"><strong>Log in</strong></Link>
+          Already have an account? <Link to="/login">Log in</Link>
         </p>
       </div>
     );

@@ -7,6 +7,7 @@ import NotFound from './components/NotFound';
 import Login from './components/Account/Login';
 import Catalogue from './components/Account/Catalogue';
 import CatalogueDetail from './components/Account/CatalogueDetail';
+import AddCatalogue from './components/Account/AddCatalogue';
 import Signup from './components/Account/Signup';
 import Profile from './components/Account/Profile';
 import Test from './components/Test';
@@ -38,6 +39,7 @@ export default function getRoutes(store) {
       <Route path="/account" component={Profile} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
       <Route path="/catalogue" component={Catalogue} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
       <Route path="/getCatalogue/:catalogueId" component={CatalogueDetail} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
+      <Route path="/addCatalogue" component={AddCatalogue} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
       <Route path="/test" component={Test} onLeave={clearMessages}/>
       <Route path="/forgot" component={Forgot} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
       <Route path='/reset/:token' component={Reset} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>

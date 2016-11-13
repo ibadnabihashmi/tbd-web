@@ -9,20 +9,20 @@ html {
 }
 
 body {
-  background-color: #f4f4f4;;
+  background-color: #fff;
   margin-bottom: 44px;
   line-height: 1.57142857;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
-}
 
 a {
   color: #1d7cf4;
+  font-weight: lighter;
 }
-
+h1,h2,h3,h4,h5,h6,p,legend,label {
+  font-weight: lighter;
+}
 a:hover {
   text-decoration: none;
 }
@@ -69,7 +69,7 @@ footer {
 
 .navbar-default {
   background-color: #fff;
-  border-color: #e0e0e0;
+  border-color: #fff !important;
 }
 
 .navbar-default .navbar-nav {
@@ -79,8 +79,8 @@ footer {
 .navbar-default .navbar-nav > li > a {
   color: #262626;
   border-bottom: 3px solid transparent;
-  padding-top: 17.5px;
-  padding-bottom: 14.5px;
+  padding-top: 10px;
+  padding-bottom: 5px;
   transition: all 0.25s;
 }
 
@@ -90,8 +90,8 @@ footer {
 }
 
 .navbar-default .navbar-nav > li > a.navbar-avatar {
-  padding-top: 13px;
-  padding-bottom: 19px;
+  padding-top: 10px;
+  padding-bottom: 5px;
 }
 
 .navbar-default .navbar-nav > li > a.navbar-avatar img {
@@ -111,7 +111,7 @@ footer {
 
 .panel {
   margin-bottom: 20px !important;
-  background-color: #fff !important;
+  background-color: #f9f9f9 !important;
   border-radius: 0px !important;
   border: solid 1px rgb(220, 220, 220) !important;
 }
@@ -165,11 +165,16 @@ footer {
 }
 
 .btn-success {
-  border-color: #208a46;
-  background: #29b35b linear-gradient(to bottom, #2ec866, #29b35b);
+  font-weight: normal;
+  border-radius: 0px;
+  border-color: #2cc062;
+  background: #2cc062;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(32, 138, 70, 0.3);
+  transition: all .5s;
 }
-
+.btn-success {
+  transition: all .5s;
+}
 .btn-success:active {
   background: #239a4e linear-gradient(to bottom, #28af59, #239a4e);
 }
@@ -185,9 +190,11 @@ footer {
 }
 
 .btn-facebook {
+  font-weight: normal;
+  border-radius: 0px;
   color: #fff;
-  border-color: #335190;
-  background: #3b5998 linear-gradient(to bottom, #4263a9, #3b5998);
+  border-color: #4060a4;
+  background: #4060a4;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(59, 89, 152, 0.3);
 }
 
@@ -197,10 +204,12 @@ footer {
 }
 
 .btn-twitter {
+  font-weight: normal;
   color: #fff;
-  border-color: #009fdb;
-  background: #00aced linear-gradient(to bottom, #05baff, #00aced);
+  border-color: #05baff;
+  background: #05baff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(0, 172, 237, 0.3);
+  border-radius: 0px;
 }
 
 .btn-twitter:hover,
@@ -209,9 +218,11 @@ footer {
 }
 
 .btn-google {
+  border-radius: 0px;
+  font-weight: normal;
   color: #fff;
-  border-color: #d54331;
-  background: #dd4b39 linear-gradient(to bottom, #e05d4d, #dd4b39);
+  border-color: #e05d4d;
+  background: #e05d4d;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.1), inset 0 -1px 4px rgba(221, 75, 57, 0.3);
 }
 
@@ -252,6 +263,7 @@ textarea {
 }
 
 .form-control {
+  font-weight: lighter;
   height: auto !important;
   padding: 8px 12px !important;
   border: 1px solid #afafaf !important;
@@ -284,7 +296,7 @@ textarea {
   position: relative;
   padding: 2px 10px;
   top: -10px;
-  background-color: #fff;
+  background-color: #f9f9f9;
   border-radius: 2px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -306,22 +318,34 @@ textarea {
   margin-bottom: 20px;
 }
 .catalogue-add-btn {
-  border: 1px solid black;
-  padding: 100px 0px;
-  border-radius: 5px;
+  border: 3px solid #383838;
+  padding: 125px 0px;
   background-color: #efefef;
+  width: 31.333333%;
+  margin: 10px 10px;
 }
 .catalogue-detail {
   padding: 30px 30px;
   border-left: 2px solid #989898;
 }
 .tbd-btn {
+  font-weight: normal;
   background: white;
   border: 2px solid black;
   color: black;
   border-radius: 0px;
+  transition: all .5s;
 }
 .tbd-btn:hover {
   background-color: black;
   color: white;
+  transition: all .5s;
+}
+.tbd-catalogue-btn {
+  color: #060606;
+  font-size: 25px;
+  font-weight: 100;
+}
+.width-100{
+  width:100%;
 }

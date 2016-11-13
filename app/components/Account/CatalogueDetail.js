@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Messages from '../Messages';
 import Dropzone from 'react-dropzone';
-import { updateCatalogue } from '../../actions/catalogue';
+import { updateCatalogue, fetchCatalogueDetails } from '../../actions/catalogue';
 
 class CatalogueDetail extends React.Component {
     constructor(props){
@@ -37,6 +37,16 @@ class CatalogueDetail extends React.Component {
         });
     }
 
+    componentDidMount(){
+        const cats = this.props.dispatch(fetchCatalogueDetails(this.state.catalogueId));
+        cats.then((res) => {
+            this.setState({catalogueName:res.catalogue.name});
+            this.setState({cataloguePrice:res.catalogue.price});
+            this.setState({catalogueTags:res.catalogue.hashtags.join(' ')});
+            this.setState({catalogueDesc:res.catalogue.description});
+        });
+    }
+
     render(){
         return (
             <div className="container">
@@ -55,48 +65,10 @@ class CatalogueDetail extends React.Component {
                                     <input type="text" name="cataloguePrice" id="cataloguePrice" placeholder="Price" className="form-control" value={this.state.cataloguePrice} onChange={this.handleChange.bind(this)}/>
                                 </div>
                                 <div className="form-group">
-                                    <input type="text" name="catalogueTags" id="catalogueTags" placeholder="Tags" className="form-control" value={this.state.catalogueTags} onChange={this.handleChange.bind(this)}/>
+                                    <input type="text" name="catalogueTags" id="catalogueTags" placeholder="Tags" className="form-control" value={this.state.catalogueTags} disabled="true" onChange={this.handleChange.bind(this)}/>
                                 </div>
                                 <div className="form-group">
                                     <textarea type="text" name="catalogueDesc" id="catalogueDesc" rows="4" placeholder="Description" className="form-control" value={this.state.catalogueDesc} onChange={this.handleChange.bind(this)}></textarea>
-                                </div>
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <Dropzone
-                                            className="dropzone"
-                                            onDrop={this.onImageDrop.bind(this)}
-                                            multiple={false}
-                                            accept="image/*">
-                                            <div className="image-upload-text">Drop image or click to select image to upload</div>
-                                        </Dropzone>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <Dropzone
-                                            className="dropzone"
-                                            onDrop={this.onImageDrop.bind(this)}
-                                            multiple={false}
-                                            accept="image/*">
-                                            <div className="image-upload-text">Drop image or click to select image to upload</div>
-                                        </Dropzone>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <Dropzone
-                                            className="dropzone"
-                                            onDrop={this.onImageDrop.bind(this)}
-                                            multiple={false}
-                                            accept="image/*">
-                                            <div className="image-upload-text">Drop image or click to select image to upload</div>
-                                        </Dropzone>
-                                    </div>
-                                    <div className="col-md-6">
-                                        <Dropzone
-                                            className="dropzone"
-                                            onDrop={this.onImageDrop.bind(this)}
-                                            multiple={false}
-                                            accept="image/*">
-                                            <div className="image-upload-text">Drop image or click to select image to upload</div>
-                                        </Dropzone>
-                                    </div>
                                 </div>
                                 <button className="btn tbd-btn" onClick={this.saveCatalogue.bind(this)}>save</button>
                             </div>

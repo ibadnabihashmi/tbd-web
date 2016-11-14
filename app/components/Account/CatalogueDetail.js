@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Messages from '../Messages';
-import Dropzone from 'react-dropzone';
 import { updateCatalogue, fetchCatalogueDetails } from '../../actions/catalogue';
-import Lightbox from 'react-images';
+import Gallery from 'react-photo-gallery';
 
 class CatalogueDetail extends React.Component {
     constructor(props){
@@ -34,18 +33,27 @@ class CatalogueDetail extends React.Component {
     componentDidMount(){
         const cats = this.props.dispatch(fetchCatalogueDetails(this.state.catalogueId));
         cats.then((res) => {
-            console.log(res);
-            this.setState({catalogueName:res.catalogue.name});
-            this.setState({cataloguePrice:res.catalogue.price});
-            this.setState({catalogueTags:res.catalogue.hashtags.join(' ')});
-            this.setState({catalogueDesc:res.catalogue.description});
+            var imgees = [];
             res.images.map((image) => {
-                this.setSate({
-                    images:this.state.images.concat(new Array({
-                        src:'http://localhost:3000'+image.source
-                    }))
-                });
+               imgees.push({
+                   src:'http://localhost:3000'+image.source,
+                   width:50,
+                   height:50,
+                   aspectRatio:1,
+                   lightboxImage:{
+                       src: 'http://localhost:3000'+image.source,
+                       caption:image.caption
+                   }
+               });
             });
+            this.setState({
+                images:imgees,
+                catalogueName:res.catalogue.name,
+                cataloguePrice:res.catalogue.price,
+                catalogueTags:res.catalogue.hashtags.join(' '),
+                catalogueDesc:res.catalogue.description
+            });
+            console.log(this.state)
         });
     }
 
@@ -56,13 +64,7 @@ class CatalogueDetail extends React.Component {
                     <div className="panel-body">
                         <Messages messages={this.props.messages}/>
                         <div className="col-lg-7">
-                            <Lightbox
-                                images={this.state.images}
-                                isOpen={this.state.lightboxIsOpen}
-                                onClickPrev={this.gotoPrevLightboxImage}
-                                onClickNext={this.gotoNextLightboxImage}
-                                onClose={this.closeLightbox}
-                            />
+                            <Gallery photos={this.state.images} />
                         </div>
                         <div className="col-lg-5">
                             <div className="catalogue-detail">

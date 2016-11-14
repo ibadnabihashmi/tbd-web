@@ -59,19 +59,29 @@ export function updateCatalogue(data) {
         dispatch({
             type:'CLEAR_MESSAGES'
         });
-        return request
-            .post('http://localhost:3000/api/catalogue/update')
-            .field('files',data.catalogueImages)
-            .send({
+        return fetch('http://localhost:3000/api/catalogue/update',{
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
                 catDesc:data.catalogueDesc,
                 catPrice:data.cataloguePrice,
-                catTags:data.catalogueTags,
                 catName:data.catalogueName,
                 catId:data.catalogueId,
-                userId:data.userId
-            }).end((res) => {
-                return res;
-            });
+                userId:data.userId  
+            })
+        }).then((response) => {
+            if(response.ok){
+                dispatch({
+                    type:'CATALOGUE_UPDATED_SUCCESS',
+                    messages:Array.isArray(json) ? json : [json]
+                });
+            }else{
+                dispatch({
+                    type:'CATALOGUE_UPDATED_FAILURE',
+                    messages:Array.isArray(json) ? json : [json]
+                });
+            }
+        })
     };
 }
 

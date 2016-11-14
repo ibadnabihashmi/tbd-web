@@ -33,9 +33,7 @@ class Catalogue extends React.Component {
             return cats;
         }else{
             return (
-                <div>
-                    <h1>Ponka!</h1>
-                </div>
+                <div></div>
             );
         }
     }

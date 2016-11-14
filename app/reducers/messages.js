@@ -10,6 +10,7 @@ export default function messages(state = {}, action) {
     case 'OAUTH_FAILURE':
     case 'UNLINK_FAILURE':
     case 'LINK_FAILURE':
+    case 'CATALOGUE_UPDATED_FAILURE':
       return {
         error: action.messages
       };
@@ -17,6 +18,7 @@ export default function messages(state = {}, action) {
     case 'CHANGE_PASSWORD_SUCCESS':
     case 'RESET_PASSWORD_SUCCESS':
     case 'CONTACT_FORM_SUCCESS':
+    case 'CATALOGUE_UPDATED_SUCCESS':    
       return {
         success: action.messages
       };

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Messages from '../Messages';
 import Dropzone from 'react-dropzone';
 import { updateCatalogue, fetchCatalogueDetails } from '../../actions/catalogue';
+import Lightbox from 'react-images';
 
 class CatalogueDetail extends React.Component {
     constructor(props){
@@ -13,8 +14,8 @@ class CatalogueDetail extends React.Component {
             cataloguePrice: '',
             catalogueTags: '',
             catalogueDesc: '',
-            catalogueImages: [],
-            userId:props.user._id
+            userId:props.user._id,
+            images:[]
         };
     }
 
@@ -24,37 +25,44 @@ class CatalogueDetail extends React.Component {
 
     saveCatalogue(){
         const data = this.state;
-        console.log(data);
-        // const promise = this.props.dispatch(updateCatalogue(data));
-        // promise.then((res) => {
-        //     console.log(res);
-        // });
-    }
-
-    onImageDrop(files){
-        this.setState({
-            catalogueImages:this.state.catalogueImages.concat(new Array(files[0]))
+        const promise = this.props.dispatch(updateCatalogue(data));
+        promise.then((res) => {
+            console.log(res);
         });
     }
 
     componentDidMount(){
         const cats = this.props.dispatch(fetchCatalogueDetails(this.state.catalogueId));
         cats.then((res) => {
+            console.log(res);
             this.setState({catalogueName:res.catalogue.name});
             this.setState({cataloguePrice:res.catalogue.price});
             this.setState({catalogueTags:res.catalogue.hashtags.join(' ')});
             this.setState({catalogueDesc:res.catalogue.description});
+            res.images.map((image) => {
+                this.setSate({
+                    images:this.state.images.concat(new Array({
+                        src:'http://localhost:3000'+image.source
+                    }))
+                });
+            });
         });
     }
 
     render(){
         return (
             <div className="container">
-                <Messages messages={this.props.messages}></Messages>
                 <div className="panel">
                     <div className="panel-body">
+                        <Messages messages={this.props.messages}/>
                         <div className="col-lg-7">
-
+                            <Lightbox
+                                images={this.state.images}
+                                isOpen={this.state.lightboxIsOpen}
+                                onClickPrev={this.gotoPrevLightboxImage}
+                                onClickNext={this.gotoNextLightboxImage}
+                                onClose={this.closeLightbox}
+                            />
                         </div>
                         <div className="col-lg-5">
                             <div className="catalogue-detail">

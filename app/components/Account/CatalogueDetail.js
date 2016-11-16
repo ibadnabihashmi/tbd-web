@@ -53,6 +53,7 @@ class CatalogueDetail extends React.Component {
                 cataloguePrice:res.catalogue.price,
                 catalogueTags:res.catalogue.hashtags.join(' '),
                 catalogueDesc:res.catalogue.description,
+                catalogueViews:res.catalogue.views,
                 display:res.catalogue.user == this.state.userId+"909090" ? false : true
             });
         });
@@ -125,6 +126,7 @@ class CatalogueDetail extends React.Component {
                 <div className="catalogue-detail">
                     <div>
                         <h1>{this.state.catalogueName}</h1>
+                        <p>{this.state.catalogueViews} views</p>
                     </div>
                     <div>
                         <h4>{this.state.cataloguePrice} Rs</h4>

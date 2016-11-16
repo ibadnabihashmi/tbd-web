@@ -19,12 +19,13 @@ class Catalogue extends React.Component {
     }
     renderCatalogues(){
         let cats = new Array();
+        let key = 0;
         if(this.state.catalogues.length > 0){
             this.state.catalogues.forEach((catalogue) => {
                 const link = `/getCatalogue/${catalogue._id}`;
                 cats.push(
-                    <a href={link} className="tbd-catalogue-btn">
-                        <div className="col-md-4 text-center catalogue-add-btn">
+                    <a href={link} className="tbd-catalogue-btn" key={key}>
+                        <div className="col-md-4 text-center catalogue-add-btn" key={key+"_div"}>
                             {catalogue.name}
                         </div>
                     </a>

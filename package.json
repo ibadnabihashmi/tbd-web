@@ -33,7 +33,7 @@
     "react-cookie": "*",
     "react-dom": "*",
     "react-dropzone": "^3.7.2",
-    "react-photo-gallery": "^4.2.14",
+    "react-images": "^0.5.1",
     "react-redux": "*",
     "react-router": "*",
     "react-transform-catch-errors": "*",

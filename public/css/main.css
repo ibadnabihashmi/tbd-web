@@ -349,3 +349,19 @@ textarea {
 .width-100{
   width:100%;
 }
+.gallery-image {
+  background-color: white;
+  border-radius: 0px !important;
+  border: solid 3px rgb(220, 220, 220) !important;
+  height: 175px;
+  padding: 5px;
+  margin-right: 10px;
+  margin-top: 10px;
+  width: 31.333333%;
+}
+.tag {
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 14px;
+}

@@ -7,6 +7,7 @@ class Catalogue extends React.Component {
         super(props);
         this.state = {
             userId: props.user._id,
+            dp:props.user.picture?'http://localhost:3000'+props.user.picture:undefined,
             catalogues:[]
         }
     }
@@ -39,16 +40,27 @@ class Catalogue extends React.Component {
         }
     }
     render(){
+        let divStyle = {
+            backgroundImage:"url('"+this.state.dp+"')",
+            padding: "70px 0px"
+        };
         return(
             <div className="container">
                 <div className="panel">
+                    <div style={divStyle}>
+                        <img
+                            className="img-responsive img-circle center-block"
+                            src={this.state.dp}
+                            width={200}
+                        />
+                    </div>
                     <div className="panel-body">
-                        {this.renderCatalogues()}
                         <a href="/addCatalogue" className="tbd-catalogue-btn">
                             <div className="col-md-4 text-center catalogue-add-btn">
                                 add catalogue +
                             </div>
                         </a>
+                        {this.renderCatalogues()}
                     </div>
                 </div>
             </div>

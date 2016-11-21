@@ -54,7 +54,7 @@ class CatalogueDetail extends React.Component {
                 catalogueTags:res.catalogue.hashtags.join(' '),
                 catalogueDesc:res.catalogue.description,
                 catalogueViews:res.catalogue.views,
-                display:res.catalogue.user == this.state.userId+"909090" ? false : true
+                display:res.catalogue.user+"9090" == this.state.userId ? false : true
             });
         });
     }
@@ -109,10 +109,13 @@ class CatalogueDetail extends React.Component {
         let tags = new Array();
         let key = 0;
         this.state.catalogueTags.split(' ').forEach((tag) => {
+            const tagLink = `http://localhost:3001/tags/${tag}`;
             tags.push(
-                <h4 className="tag" key={key}>
-                    #{tag}
-                </h4>
+                <a href={tagLink} key={key+"a"}>
+                    <h4 className="tag" key={key}>
+                        #{tag}
+                    </h4>
+                </a>
             );
             key++;
         });

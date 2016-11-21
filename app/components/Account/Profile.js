@@ -1,19 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { updateProfile, changePassword, deleteAccount } from '../../actions/auth';
-import { link, unlink } from '../../actions/oauth';
+import { updateProfile, updatePicture, changePassword ,saveTag } from '../../actions/account';
 import Messages from '../Messages';
+import Dropzone from 'react-dropzone';
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: props.user._id,
       email: props.user.email,
       name: props.user.name,
       gender: props.user.gender,
       location: props.user.location,
       website: props.user.website,
       gravatar: props.user.gravatar,
+      picture: props.user.picture?'http://localhost:3000/'+props.user.picture:undefined,
       password: '',
       confirm: ''
     };
@@ -30,40 +32,52 @@ class Profile extends React.Component {
 
   handleChangePassword(event) {
     event.preventDefault();
-    this.props.dispatch(changePassword(this.state.password, this.state.confirm, this.props.token));
+    this.props.dispatch(changePassword(this.state.password, this.state.confirm, this.state.userId, this.props.token));
   }
 
-  handleDeleteAccount(event) {
+  onImageDrop(files){
+    let response = this.props.dispatch(updatePicture(files[0],this.state.userId));
+    this.setState({
+      picture:files[0].preview
+    });
+  }
+
+  isPicturePresent(){
+    if(this.state.picture != undefined){
+      return (
+          <div>
+            <img
+                src={this.state.picture}
+                width={353}
+            />
+          </div>
+      );
+    }else{
+      return(
+          <div>
+            <Dropzone
+                className="dropzone"
+                onDrop={this.onImageDrop.bind(this)}
+                multiple={false}
+                accept="image/*">
+              <div className="image-upload-text">Drop image or click to select image to upload</div>
+            </Dropzone>
+          </div>
+      );
+    }
+  }
+
+  saveTag(event){
     event.preventDefault();
-    this.props.dispatch(deleteAccount(this.props.token));
-  }
-
-  handleLink(provider) {
-    this.props.dispatch(link(provider))
-  }
-
-  handleUnlink(provider) {
-    this.props.dispatch(unlink(provider));
+    let promise = this.props.dispatch(saveTag(this.state.tag,this.state.userId));
+    promise.then((json) => {
+      console.log(json);
+    });
   }
 
   render() {
-    const facebookLinkedAccount = this.props.user.facebook ? (
-      <a role="button" className="text-danger" onClick={this.handleUnlink.bind(this, 'facebook')}>Unlink your Facebook account</a>
-    ) : (
-      <a role="button" onClick={this.handleLink.bind(this, 'facebook')}>Link your Facebook account</a>
-    );
-    const twitterLinkedAccount = this.props.user.twitter ? (
-      <a role="button" className="text-danger" onClick={this.handleUnlink.bind(this, 'twitter')}>Unlink your Twitter account</a>
-    ) : (
-      <a role="button" onClick={this.handleLink.bind(this, 'twitter')}>Link your Twitter account</a>
-    );
-    const googleLinkedAccount = this.props.user.google ? (
-      <a role="button" className="text-danger" onClick={this.handleUnlink.bind(this, 'google')}>Unlink your Google account</a>
-    ) : (
-      <a role="button" onClick={this.handleLink.bind(this, 'google')}>Link your Google account</a>
-    );
     return (
-      <div className="container">
+      <div className="container col-lg-6 col-lg-offset-3">
         <div className="panel">
           <div className="panel-body">
             <Messages messages={this.props.messages}/>
@@ -105,14 +119,30 @@ class Profile extends React.Component {
                 </div>
               </div>
               <div className="form-group">
-                <label className="col-sm-3">Gravatar</label>
-                <div className="col-sm-4">
-                  <img src={this.state.gravatar} width="100" height="100" className="profile"/>
+                <div className="col-sm-3"></div>
+                <div className="col-sm-7">
+                  {this.isPicturePresent()}
                 </div>
               </div>
               <div className="form-group">
                 <div className="col-sm-offset-3 col-sm-4">
                   <button type="submit" className="btn btn-success">Update Profile</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="panel">
+          <div className="panel-body">
+            <form onSubmit={this.saveTag.bind(this)} className="form-horizontal">
+              <legend>Preferences</legend>
+              <div className="form-group">
+                <label htmlFor="password" className="col-sm-3">Add tags</label>
+                <div className="col-sm-7">
+                  <input type="text" name="tag" id="tag" className="form-control" value={this.state.tag} onChange={this.handleChange.bind(this)}/>
+                </div>
+                <div className="col-sm-2">
+                  <button type="submit" className="btn btn-success">Save</button>
                 </div>
               </div>
             </form>
@@ -137,33 +167,6 @@ class Profile extends React.Component {
               <div className="form-group">
                 <div className="col-sm-4 col-sm-offset-3">
                   <button type="submit" className="btn btn-success">Change Password</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className="panel">
-          <div className="panel-body">
-            <div className="form-horizontal">
-              <legend>Linked Accounts</legend>
-              <div className="form-group">
-                <div className="col-sm-offset-3 col-sm-4">
-                  <p>{facebookLinkedAccount}</p>
-                  <p>{twitterLinkedAccount}</p>
-                  <p>{googleLinkedAccount}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="panel">
-          <div className="panel-body">
-            <form onSubmit={this.handleDeleteAccount.bind(this)} className="form-horizontal">
-              <legend>Delete Account</legend>
-              <div className="form-group">
-                <p className="col-sm-offset-3 col-sm-9">You can delete your account, but keep in mind this action is irreversible.</p>
-                <div className="col-sm-offset-3 col-sm-9">
-                  <button type="submit" className="btn btn-danger">Delete my account</button>
                 </div>
               </div>
             </form>

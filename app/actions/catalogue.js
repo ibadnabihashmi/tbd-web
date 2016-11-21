@@ -102,3 +102,21 @@ export function fetchCatalogueDetails(catalogueId) {
         });
     };
 }
+
+export function fetchCataloguesByTag(tag) {
+    return (dispatch) => {
+        dispatch({
+            type:'CLEAR_MESSAGES'
+        });
+        return fetch('http://localhost:3000/api/hashtag/tags/'+tag,{
+            method:'get',
+            headers: { 'Content-Type':'application/json' }
+        }).then((response) => {
+            if(response.ok){
+                return response.json();
+            }else{
+                return response.json();
+            }
+        })
+    };
+}

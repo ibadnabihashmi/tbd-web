@@ -365,3 +365,31 @@ textarea {
   padding: 5px 10px;
   border-radius: 14px;
 }
+.cover{
+  background-color: #bcbcbc;
+  height: 325px;
+  position: relative;
+  filter: blur(10px);
+  -webkit-filter: blur(15px);
+  -moz-filter: blur(15px);
+  -o-filter: blur(15px);
+  -ms-filter: blur(15px);
+  filter: url(#blur);
+  filter: progid: DXImageTransform.Microsoft.Blur(PixelRadius='10');
+  overflow: hidden;
+}
+.displayPicture{
+  background-color: gray;
+  color:white;
+  position: absolute;
+  margin: -17% 30%;
+  border: 5px solid white;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+.displayPicture h1 {
+  font-weight: 600;
+  font-size:70px;
+  margin-top: 55px;
+}

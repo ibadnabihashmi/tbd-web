@@ -45,24 +45,31 @@ class Profile extends React.Component {
   isPicturePresent(){
     if(this.state.picture != undefined){
       return (
-          <div>
-            <img
-                src={this.state.picture}
-                width={353}
-            />
-          </div>
+        <div>
+          <img
+            src={this.state.picture}
+            width={353}
+          />
+          <Dropzone
+            className="dropzone"
+            onDrop={this.onImageDrop.bind(this)}
+            multiple={false}
+            accept="image/*">
+            <div className="image-upload-text">Drop image or click to select image to upload</div>
+          </Dropzone>
+        </div>
       );
     }else{
       return(
-          <div>
-            <Dropzone
-                className="dropzone"
-                onDrop={this.onImageDrop.bind(this)}
-                multiple={false}
-                accept="image/*">
-              <div className="image-upload-text">Drop image or click to select image to upload</div>
-            </Dropzone>
-          </div>
+        <div>
+          <Dropzone
+            className="dropzone"
+            onDrop={this.onImageDrop.bind(this)}
+            multiple={false}
+            accept="image/*">
+            <div className="image-upload-text">Drop image or click to select image to upload</div>
+          </Dropzone>
+        </div>
       );
     }
   }

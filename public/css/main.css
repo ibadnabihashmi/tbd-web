@@ -368,21 +368,18 @@ textarea {
 .cover{
   background-color: #bcbcbc;
   height: 325px;
-  position: relative;
-  filter: blur(10px);
-  -webkit-filter: blur(15px);
-  -moz-filter: blur(15px);
-  -o-filter: blur(15px);
-  -ms-filter: blur(15px);
-  filter: url(#blur);
-  filter: progid: DXImageTransform.Microsoft.Blur(PixelRadius='10');
-  overflow: hidden;
+  overflow: auto;
+  background-position: center -70px;
+  -webkit-filter: blur(30px);
+  filter: url(/media/blur.svg#blur);
+  filter: blur(30px);
+  border: 2px solid black;
 }
 .displayPicture{
   background-color: gray;
-  color:white;
+  color: white;
   position: absolute;
-  margin: -17% 30%;
+  margin: -18% 32%;
   border: 5px solid white;
   border-radius: 50%;
   width: 200px;

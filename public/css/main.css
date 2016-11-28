@@ -367,26 +367,74 @@ textarea {
 }
 .cover{
   background-color: #bcbcbc;
-  height: 325px;
+  height: 350px;
   overflow: auto;
   background-position: center -70px;
-  -webkit-filter: blur(30px);
+  -webkit-filter: blur(60px);
   filter: url(/media/blur.svg#blur);
-  filter: blur(30px);
+  filter: blur(60px);
   border: 2px solid black;
 }
 .displayPicture{
-  background-color: gray;
-  color: white;
-  position: absolute;
-  margin: -18% 32%;
-  border: 5px solid white;
-  border-radius: 50%;
-  width: 200px;
-  height: 200px;
+  width: 230px;
+  margin-top: -310px;
+  border: 2px solid white;
 }
 .displayPicture h1 {
   font-weight: 600;
-  font-size:70px;
-  margin-top: 55px;
+  font-size:85px;
+  margin-top: 65px;
+}
+.no-photo {
+  margin: -315px 65px;
+  border-radius: 121px;
+  height: 230px;
+  color: white;
+  background-color: grey;
+}
+.header-username {
+  background-color: #70c050;
+  position: relative;
+  margin: 18px 78px;
+  color: white;
+  /* border: 1px solid; */
+  border-radius: 35px;
+  height: 46px;
+}
+.header-username-no-pic {
+  margin: 329px 78px !important;
+}
+.header-username h3 span{
+  font-size: 30px;
+  position: relative;
+  top: 3px;
+  font-weight: 900;
+  cursor: pointer;
+}
+.header-username h3 {
+  top: 3px;
+  position: relative;
+}
+.following {
+  font-size: 25px;
+  font-weight: lighter;
+  position: absolute;
+  margin-top: -220px;
+  background-color: black;
+  color:white;
+  padding: 10px 10px;
+  border-radius: 34px;
+  border: 1px solid white;
+}
+.followers {
+  font-size: 25px;
+  font-weight: lighter;
+  position: absolute;
+  margin-top: -220px;
+  margin-left: -60px;
+  background-color: black;
+  color:white;
+  padding: 10px 10px;
+  border-radius: 34px;
+  border: 1px solid white;
 }

@@ -38,7 +38,7 @@ export default function getRoutes(store) {
       <Route path="/login" component={Login} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
       <Route path="/signup" component={Signup} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
       <Route path="/account" component={Profile} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
-      <Route path="/catalogue" component={Catalogue} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
+      <Route path="/:username" component={Catalogue} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
       <Route path="/getCatalogue/:catalogueId" component={CatalogueDetail} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
       <Route path="/tags/:tag" component={CataloguesTagged} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
       <Route path="/addCatalogue" component={AddCatalogue} onEnter={ensureAuthenticated} onLeave={clearMessages}/>

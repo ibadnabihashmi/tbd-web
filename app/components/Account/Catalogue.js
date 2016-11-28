@@ -8,7 +8,7 @@ class Catalogue extends React.Component {
         this.state = {
             userId: props.user._id,
             name: props.user.name,
-            username: props.user.username,
+            username: props.params.username,
             dp:props.user.picture?'http://localhost:3000'+props.user.picture:undefined,
             isSameUser: false,
             catalogues:[]
@@ -17,7 +17,9 @@ class Catalogue extends React.Component {
     componentDidMount(){
         let result = this.props.dispatch(fetchUserCatalogues(this.state.username));
         result.then((json) => {
-            this.setState({catalogues:json.catalogues});
+            this.setState({
+                catalogues:json.catalogues
+            });
             if(json.userId === this.state.userId){
                 this.setState({isSameUser: true});
             }
@@ -49,9 +51,19 @@ class Catalogue extends React.Component {
             }
             return cats;
         }else{
-            return (
-                <div></div>
-            );
+            if(this.state.isSameUser){
+                return (
+                  <a href="/addCatalogue" className="tbd-catalogue-btn">
+                      <div className="col-md-4 text-center catalogue-add-btn">
+                          add catalogue +
+                      </div>
+                  </a>
+                );
+            }else{
+                return (
+                  <div></div>
+                );
+            }
         }
     }
     getHeaderName(clazz){

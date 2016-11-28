@@ -23,7 +23,7 @@ export function login(email, password) {
             user: json.user
           });
           cookie.save('token', json.token, { expires: moment().add(1, 'hour').toDate() });
-          browserHistory.push('/catalogue');
+          browserHistory.push(`/user/${json.user.username}`);
         });
       } else {
         return response.json().then((json) => {
@@ -37,7 +37,7 @@ export function login(email, password) {
   };
 }
 
-export function signup(name, email, password) {
+export function signup(name, username, email, password) {
   return (dispatch) => {
     dispatch({
       type: 'CLEAR_MESSAGES'
@@ -45,7 +45,7 @@ export function signup(name, email, password) {
     return fetch('http://localhost:3000/api/user/signup', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: name, email: email, password: password })
+      body: JSON.stringify({ name: name, username: username, email: email, password: password })
     }).then((response) => {
       return response.json().then((json) => {
         if (response.ok) {
@@ -54,7 +54,7 @@ export function signup(name, email, password) {
             token: json.token,
             user: json.user
           });
-          browserHistory.push('/catalogue');
+          browserHistory.push(`/user/${json.user.username}`);
           cookie.save('token', json.token, { expires: moment().add(1, 'hour').toDate() });
         } else {
           dispatch({

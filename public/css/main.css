@@ -370,9 +370,9 @@ textarea {
   height: 350px;
   overflow: auto;
   background-position: center -70px;
-  -webkit-filter: blur(60px);
+  -webkit-filter: blur(30px);
   filter: url(/media/blur.svg#blur);
-  filter: blur(60px);
+  filter: blur(30px);
   border: 2px solid black;
 }
 .displayPicture{

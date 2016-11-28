@@ -8,7 +8,7 @@ import Messages from '../Messages';
 class Signup extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { name: '', email: '', password: '' };
+    this.state = { name: '', email: '', password: '',username: '' };
   }
 
   handleChange(event) {
@@ -17,7 +17,7 @@ class Signup extends React.Component {
 
   handleSignup(event) {
     event.preventDefault();
-    this.props.dispatch(signup(this.state.name, this.state.email, this.state.password));
+    this.props.dispatch(signup(this.state.name, this.state.username, this.state.email, this.state.password));
   }
 
   handleFacebook() {
@@ -50,6 +50,9 @@ class Signup extends React.Component {
               <legend>Create an account</legend>
               <div className="form-group">
                 <input type="text" name="name" id="name" placeholder="Name" autoFocus className="form-control" value={this.state.name} onChange={this.handleChange.bind(this)}/>
+              </div>
+              <div className="form-group">
+                <input type="text" name="username" id="username" placeholder="Username" autoFocus className="form-control" value={this.state.username} onChange={this.handleChange.bind(this)}/>
               </div>
               <div className="form-group">
                 <input type="email" name="email" id="email" placeholder="Email" className="form-control" value={this.state.email} onChange={this.handleChange.bind(this)}/>

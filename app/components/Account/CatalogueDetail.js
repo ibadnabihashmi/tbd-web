@@ -91,7 +91,7 @@ class CatalogueDetail extends React.Component {
         let key = 0;
         this.state.images.forEach((image) => {
             var style = {
-                backgroundImage:"url('"+image.src+"')"
+                backgroundImage:"url('"+image.src+"') !important"
             };
             images.push(
                <a key={key+"_a"} href="#">

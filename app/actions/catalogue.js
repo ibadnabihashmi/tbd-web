@@ -36,12 +36,12 @@ export function saveCatalogue(data) {
     };
 }
 
-export function fetchUserCatalogues(userId) {
+export function fetchUserCatalogues(username) {
     return (dispatch) => {
         dispatch({
             type:'CLEAR_MESSAGES'
         });
-        return fetch('http://localhost:3000/api/catalogue/fetchUserCatalogues?userId='+userId,{
+        return fetch('http://localhost:3000/api/catalogue/fetchUserCatalogues?username='+username,{
             method:'get',
             headers: { 'Content-Type':'application/json' }
         }).then((response) => {

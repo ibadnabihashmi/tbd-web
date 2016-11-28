@@ -15,6 +15,7 @@ class Header extends React.Component {
 
   render() {
     const active = { borderBottomColor: '#3f51b5' };
+    const catalogueLink = this.props.user ? `/user/${this.props.user.username}` : '';
     const rightNav = this.props.token ? (
       <ul className="nav navbar-nav navbar-right">
         <li className="dropdown">
@@ -41,7 +42,7 @@ class Header extends React.Component {
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">
               <li><IndexLink to="/" activeStyle={active}>Home</IndexLink></li>
-              <li><Link to="/catalogue" activeStyle={active}>Catalogues</Link></li>
+              <li><Link to={catalogueLink} activeStyle={active}>Catalogues</Link></li>
             </ul>
             {rightNav}
           </div>

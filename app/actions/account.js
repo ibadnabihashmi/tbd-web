@@ -110,3 +110,39 @@ export function updatePicture(image,userId) {
         });
     };
 }
+
+export function follow(user1,user2) {
+    return (dispatch) => {
+        dispatch({
+            type:'CLEAR_MESSAGES'
+        });
+        fetch('http://localhost:3000/api/user/follow',{
+            method:'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({
+                user1:user1,
+                user2:user2
+            })
+        }).then((response) => {
+            console.log(response.json());
+        });
+    }
+}
+
+export function unfollow(user1,user2) {
+    return (dispatch) => {
+        dispatch({
+            type:'CLEAR_MESSAGES'
+        });
+        fetch('http://localhost:3000/api/user/unfollow',{
+            method:'post',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({
+                user1:user1,
+                user2:user2
+            })
+        }).then((response) => {
+            console.log(response.json());
+        });
+    }
+}

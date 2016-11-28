@@ -54,7 +54,7 @@ class CatalogueDetail extends React.Component {
                 catalogueTags:res.catalogue.hashtags.join(' '),
                 catalogueDesc:res.catalogue.description,
                 catalogueViews:res.catalogue.views,
-                display:res.catalogue.user+"9090" == this.state.userId ? false : true
+                display:res.catalogue.user == this.state.userId ? false : true
             });
         });
     }
@@ -91,7 +91,7 @@ class CatalogueDetail extends React.Component {
         let key = 0;
         this.state.images.forEach((image) => {
             var style = {
-                backgroundImage:"url('"+image.src+"') !important"
+                backgroundImage:"url('"+image.src+"')"
             };
             images.push(
                <a key={key+"_a"} href="#">

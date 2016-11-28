@@ -438,3 +438,16 @@ textarea {
   border-radius: 34px;
   border: 1px solid white;
 }
+.header-username-own {
+  background-color: rgba(112, 192, 80, 0);
+  position: relative;
+  margin: 18px 78px;
+  color: white;
+  border: 1px solid;
+  border-radius: 35px;
+  height: 46px;
+}
+.header-username-own h3 {
+  top: -12px;
+  position: relative;
+}

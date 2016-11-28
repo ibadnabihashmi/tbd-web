@@ -1,30 +1,43 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUserCatalogues } from '../../actions/catalogue';
+import { follow, unfollow } from '../../actions/account';
 
 class Catalogue extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             userId: props.user._id,
-            name: props.user.name,
+            name: '',
             username: props.params.username,
-            dp:props.user.picture?'http://localhost:3000'+props.user.picture:undefined,
+            dp:'',
             isSameUser: false,
-            catalogues:[]
-        }
+            catalogues:[],
+            userId2:''
+        };
+        this.follow = this.follow.bind(this);
+        this.unfollow = this.unfollow.bind(this);
     }
     componentDidMount(){
         let result = this.props.dispatch(fetchUserCatalogues(this.state.username));
         result.then((json) => {
             this.setState({
-                catalogues:json.catalogues
+                catalogues:json.catalogues,
+                dp: json.user.picture?'http://localhost:3000'+json.user.picture:undefined,
+                name: json.user.name,
+                userId2:json.user._id
             });
-            if(json.userId === this.state.userId){
+            if(json.user._id === this.state.userId){
                 this.setState({isSameUser: true});
             }
             this.renderCatalogues();
         });
+    }
+    follow(){
+        this.props.dispatch(follow(this.state.userId,this.state.userId2));
+    }
+    unfollow(){
+        this.props.dispatch(unfollow(this.state.userId,this.state.userId2));
     }
     renderCatalogues(){
         let cats = new Array();
@@ -39,11 +52,12 @@ class Catalogue extends React.Component {
                         </div>
                     </a>
                 );
+                key++;
             });
             if(this.state.isSameUser){
                 cats.push(
-                    <a href="/addCatalogue" className="tbd-catalogue-btn">
-                        <div className="col-md-4 text-center catalogue-add-btn">
+                    <a href="/addCatalogue" className="tbd-catalogue-btn" key={key}>
+                        <div className="col-md-4 text-center catalogue-add-btn" key={key+"_div"}>
                             add catalogue +
                         </div>
                     </a>
@@ -69,14 +83,14 @@ class Catalogue extends React.Component {
     getHeaderName(clazz){
         if(this.state.isSameUser){
             return (
-                <div className={clazz}>
+                <div className={`${clazz} header-username-own`}>
                     <h3 className="text-center">{this.state.name}</h3>
                 </div>
             );
         }else{
             return (
                 <div className={clazz}>
-                    <h3 className="text-center">{this.state.name} <span>+</span></h3>
+                    <h3 className="text-center">{this.state.name} <span onClick={this.follow}>+</span></h3>
                 </div>
             );
         }

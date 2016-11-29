@@ -7,13 +7,15 @@ class Catalogue extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            userId: props.user._id,
-            name: '',
-            username: props.params.username,
-            dp:'',
+            username:props.params.username,
             isSameUser: false,
-            catalogues:[],
-            userId2:''
+            user1:props.user,
+            user2:{
+                catalogues:[],
+                following:[],
+                followers:[],
+                picture:''
+            }
         };
         this.follow = this.follow.bind(this);
         this.unfollow = this.unfollow.bind(this);
@@ -21,29 +23,47 @@ class Catalogue extends React.Component {
     componentDidMount(){
         let result = this.props.dispatch(fetchUserCatalogues(this.state.username));
         result.then((json) => {
+            json.user.catalogues = json.catalogues;
+            json.user.picture = json.user.picture?'http://localhost:3000'+json.user.picture:undefined;
             this.setState({
-                catalogues:json.catalogues,
-                dp: json.user.picture?'http://localhost:3000'+json.user.picture:undefined,
-                name: json.user.name,
-                userId2:json.user._id
+                user2:json.user
             });
-            if(json.user._id === this.state.userId){
+            if(json.user._id === this.state.user1._id){
                 this.setState({isSameUser: true});
             }
             this.renderCatalogues();
         });
+
     }
     follow(){
-        this.props.dispatch(follow(this.state.userId,this.state.userId2));
+        this.props.dispatch(follow(this.state.user1._id,this.state.user2._id));
+        let user1 = this.state.user1;
+        let user2 = this.state.user2;
+        user2.followers.push(user1._id);
+        user1.following.push(user2._id);
+        this.setState({
+            user1:user1,
+            user2:user2
+        });
     }
     unfollow(){
-        this.props.dispatch(unfollow(this.state.userId,this.state.userId2));
+        this.props.dispatch(unfollow(this.state.user1._id,this.state.user2._id));
+        let user1 = this.state.user1;
+        let user2 = this.state.user2;
+        let index = user2.followers.indexOf(user1._id);
+        user2.followers.splice(index,1);
+        index = user1.following.indexOf(user2._id);
+        user1.following.splice(index,1);
+        this.setState({
+            user1:user1,
+            user2:user2
+        });
     }
     renderCatalogues(){
         let cats = new Array();
         let key = 0;
-        if(this.state.catalogues.length > 0){
-            this.state.catalogues.forEach((catalogue) => {
+        if(this.state.user2.catalogues.length > 0){
+            this.state.user2.catalogues.forEach((catalogue) => {
                 const link = `/getCatalogue/${catalogue._id}`;
                 cats.push(
                     <a href={link} className="tbd-catalogue-btn" key={key}>
@@ -84,39 +104,44 @@ class Catalogue extends React.Component {
         if(this.state.isSameUser){
             return (
                 <div className={`${clazz} header-username-own`}>
-                    <h3 className="text-center">{this.state.name}</h3>
+                    <h3 className="text-center">{this.state.user2.name}</h3>
                 </div>
             );
         }else{
-            return (
-                <div className={clazz}>
-                    <h3 className="text-center">{this.state.name} <span onClick={this.follow}>+</span></h3>
-                </div>
+            const headerName = this.state.user2.followers.indexOf(this.state.user1._id) != -1 ? (
+              <div className={`${clazz } imfollowing`}>
+                  <h3 className="text-center">{this.state.user2.name} <span onClick={this.unfollow}>-</span></h3>
+              </div>
+            ) : (
+              <div className={clazz}>
+                  <h3 className="text-center">{this.state.user2.name} <span onClick={this.follow}>+</span></h3>
+              </div>
             );
+            return headerName;
         }
     }
-    // green #3897f0
-    // blue  #70c050
+    // blue #3897f0
+    // green  #70c050
     getHeader(){
         const divStyle = {
-            backgroundImage:"url('"+this.state.dp+"')"
+            backgroundImage:"url('"+this.state.user2.picture+"')"
         };
-        if(this.state.dp != undefined){
+        if(this.state.user2.picture != undefined){
             return (
                 <div className="text-center center-block">
                     <div className="cover" style={divStyle}></div>
                     <div className="col-md-4 text-right right">
-                        <span className="following">400</span>
+                        <span className="following">{this.state.user2.following.length}</span>
                     </div>
                     <div className="col-md-4 text-center">
                         <img
                             className="img-responsive img-circle center-block displayPicture"
-                            src={this.state.dp}
+                            src={this.state.user2.picture}
                         />
                         {this.getHeaderName("header-username text-center")}
                     </div>
                     <div className="col-md-4 text-left left">
-                        <span className="followers">400</span>
+                        <span className="followers">{this.state.user2.followers.length}</span>
                     </div>
 
                 </div>
@@ -126,18 +151,18 @@ class Catalogue extends React.Component {
                 <div>
                     <div className="cover"></div>
                     <div className="col-md-4 text-right right">
-                        <span className="following">400</span>
+                        <span className="following">{this.state.user2.following.length}</span>
                     </div>
                     <div className="col-md-4 text-center">
                         <div className="displayPicture no-photo">
                             <h1 className="text-center">
-                                {this.state.username[0].toUpperCase()}{this.state.username[1].toUpperCase()}
+                                {this.state.user2.username[0].toUpperCase()}{this.state.user2.username[1].toUpperCase()}
                             </h1>
                         </div>
                         {this.getHeaderName("header-username header-username-no-pic text-center")}
                     </div>
                     <div className="col-md-4 text-left left">
-                        <span className="followers">400</span>
+                        <span className="followers">{this.state.user2.followers.length}</span>
                     </div>
                 </div>
             );

@@ -422,7 +422,7 @@ textarea {
   margin-top: -220px;
   background-color: black;
   color:white;
-  padding: 10px 10px;
+  padding: 0px 12px;
   border-radius: 34px;
   border: 1px solid white;
 }
@@ -434,7 +434,7 @@ textarea {
   margin-left: -60px;
   background-color: black;
   color:white;
-  padding: 10px 10px;
+  padding: 0px 12px;
   border-radius: 34px;
   border: 1px solid white;
 }
@@ -450,4 +450,7 @@ textarea {
 .header-username-own h3 {
   top: -12px;
   position: relative;
+}
+.imfollowing {
+  background-color: #3897f0 !important;
 }

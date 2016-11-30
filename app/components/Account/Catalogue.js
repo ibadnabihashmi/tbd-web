@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUserCatalogues } from '../../actions/catalogue';
 import { follow, unfollow } from '../../actions/account';
+import { Link } from 'react-router';
 
 class Catalogue extends React.Component {
     constructor(props){
@@ -66,32 +67,32 @@ class Catalogue extends React.Component {
             this.state.user2.catalogues.forEach((catalogue) => {
                 const link = `/getCatalogue/${catalogue._id}`;
                 cats.push(
-                    <a href={link} className="tbd-catalogue-btn" key={key}>
+                    <Link to={link} className="tbd-catalogue-btn" key={key}>
                         <div className="col-md-4 text-center catalogue-add-btn" key={key+"_div"}>
                             {catalogue.name}
                         </div>
-                    </a>
+                    </Link>
                 );
                 key++;
             });
             if(this.state.isSameUser){
                 cats.push(
-                    <a href="/addCatalogue" className="tbd-catalogue-btn" key={key}>
+                    <Link to="/addCatalogue" className="tbd-catalogue-btn" key={key}>
                         <div className="col-md-4 text-center catalogue-add-btn" key={key+"_div"}>
                             add catalogue +
                         </div>
-                    </a>
+                    </Link>
                 );
             }
             return cats;
         }else{
             if(this.state.isSameUser){
                 return (
-                  <a href="/addCatalogue" className="tbd-catalogue-btn">
+                  <Link href="/addCatalogue" className="tbd-catalogue-btn">
                       <div className="col-md-4 text-center catalogue-add-btn">
                           add catalogue +
                       </div>
-                  </a>
+                  </Link>
                 );
             }else{
                 return (
@@ -156,7 +157,7 @@ class Catalogue extends React.Component {
                     <div className="col-md-4 text-center">
                         <div className="displayPicture no-photo">
                             <h1 className="text-center">
-                                {this.state.user2.username[0].toUpperCase()}{this.state.user2.username[1].toUpperCase()}
+                                {this.state.user2.username[0].toUpperCase()}
                             </h1>
                         </div>
                         {this.getHeaderName("header-username header-username-no-pic text-center")}

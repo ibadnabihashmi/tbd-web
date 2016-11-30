@@ -154,12 +154,12 @@ class Catalogue extends React.Component {
                     <div className="col-md-4 text-right right">
                         <span className="following">{this.state.user2.following.length}</span>
                     </div>
-                    <div className="col-md-4 text-center">
-                        <div className="displayPicture no-photo">
+                    <div className="col-md-4 text-center" style={{height:'0px'}}>
+                        <span className="img-responsive img-circle center-block displayPicture no-photo">
                             <h1 className="text-center">
                                 {this.state.user2.username[0].toUpperCase()}
                             </h1>
-                        </div>
+                        </span>
                         {this.getHeaderName("header-username header-username-no-pic text-center")}
                     </div>
                     <div className="col-md-4 text-left left">

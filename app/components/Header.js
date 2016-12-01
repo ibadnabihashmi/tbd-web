@@ -19,7 +19,7 @@ class Header extends React.Component {
       <ul className="nav navbar-nav navbar-right">
         <li className="dropdown">
           <a href="#" data-toggle="dropdown" className="navbar-avatar dropdown-toggle">
-            {this.props.user.name || this.props.user.email || this.props.user.id}{' '}
+            {this.props.user.username || this.props.user.email || this.props.user.id}{' '}
             <i className="caret"></i>
           </a>
           <ul className="dropdown-menu">
@@ -44,6 +44,7 @@ class Header extends React.Component {
             <ul className="nav navbar-nav">
               <li><Link to="/home" activeStyle={active}>Home</Link></li>
             </ul>
+            <h3 className="text-center header-main-title">{this.props.user.name}</h3>
             {rightNav}
           </div>
         </div>

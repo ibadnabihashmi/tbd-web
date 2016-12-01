@@ -455,3 +455,8 @@ textarea {
 .imfollowing {
   background-color: #3897f0 !important;
 }
+.header-main-title {
+  font-family: 'Great Vibes', Helvetica, sans-serif;
+  color: #000;
+  font-weight: 700;
+}

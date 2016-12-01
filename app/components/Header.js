@@ -40,11 +40,13 @@ class Header extends React.Component {
     return (
       <nav className="navbar navbar-default navbar-static-top">
         <div className="container">
+          <div className="navbar-header">
+            <h2 className="navbar-brand header-main-title">{ this.props.token ? this.props.user.name : 'TBD'}</h2>
+          </div>
           <div id="navbar" className="navbar-collapse collapse">
             <ul className="nav navbar-nav">
               <li><Link to="/home" activeStyle={active}>Home</Link></li>
             </ul>
-            <h3 className="text-center header-main-title">{this.props.user.name}</h3>
             {rightNav}
           </div>
         </div>

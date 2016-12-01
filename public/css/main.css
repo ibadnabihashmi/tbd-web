@@ -459,4 +459,12 @@ textarea {
   font-family: 'Great Vibes', Helvetica, sans-serif;
   color: #000;
   font-weight: 700;
+  font-size: 40px;
+}
+.navbar-brand {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  text-align: center;
+  margin:0 auto;
 }

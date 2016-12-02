@@ -460,6 +460,7 @@ textarea {
   color: #000;
   font-weight: 700;
   font-size: 40px;
+  margin-top: 5px !important;
 }
 .navbar-brand {
   position: absolute;

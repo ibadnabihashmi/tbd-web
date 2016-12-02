@@ -469,3 +469,18 @@ textarea {
   text-align: center;
   margin:0 auto;
 }
+.feed-element {
+  margin: 50px 0px;
+  background-color: white;
+  padding: 5px 5px;
+  border: 1px solid gainsboro;
+}
+.feed-element-name {
+  float: left;
+  font-weight: lighter;
+  cursor: pointer;
+}
+.feed-element-price {
+  float: right;
+  font-weight: lighter;
+}

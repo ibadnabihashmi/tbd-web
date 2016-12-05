@@ -468,6 +468,7 @@ textarea {
   left: 0;
   text-align: center;
   margin:0 auto;
+  top: 2px;
 }
 .feed-element {
   margin: 50px 0px;

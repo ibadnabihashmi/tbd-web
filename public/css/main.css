@@ -484,3 +484,11 @@ textarea {
   float: right;
   font-weight: lighter;
 }
+.feed-element-cat-name {
+  cursor: pointer;
+}
+.profile-page-headername-overlay {
+  top: -70px;
+  z-index: 99999;
+  background-color: white;
+}

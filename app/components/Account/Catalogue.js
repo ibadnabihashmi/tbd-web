@@ -172,6 +172,9 @@ class Catalogue extends React.Component {
     render(){
         return(
             <div className="container">
+                <div className="col-lg-4 col-lg-offset-4">
+                    <h2 className="navbar-brand header-main-title profile-page-headername-overlay">{ this.state.user2 ? this.state.user2.name : 'TBD'}</h2>
+                </div>
                 <div className="panel">
                     {this.getHeader()}
                     <div className="panel-body">

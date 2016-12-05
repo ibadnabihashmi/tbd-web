@@ -8,11 +8,11 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     var from = Date.now();
-    var to = Number(from) - 360000000;
+    var to = Number(from) - 18000000;
     this.state = {
       user: props.user,
-      from: new Date(Number(from)).toISOString(),
-      to: new Date(Number(to)).toISOString(),
+      from: from,
+      to: to,
       catalogues: []
     };
     this.goToUser = this.goToUser.bind(this);
@@ -40,7 +40,7 @@ class Home extends React.Component {
             </div>
             <img src={`http://localhost:3000${catalogue.images[0]}`} style={imageStyle} key={`key2_${key}`}/>
             <div>
-              <h4 onClick={this.goToCatalogue.bind(this,catalogue._id)}>{catalogue.name}</h4>
+              <h4 onClick={this.goToCatalogue.bind(this,catalogue._id)} className="feed-element-cat-name">{catalogue.name}</h4>
               <p>{catalogue.description}</p>
             </div>
             <div></div>
@@ -58,6 +58,7 @@ class Home extends React.Component {
   componentDidMount() {
     let result = this.props.dispatch(fetchFeed(this.state.user._id,this.state.from,this.state.to));
     result.then((json) => {
+      console.log(json);
       this.setState({
         catalogues:json.catalogues
       });

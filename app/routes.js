@@ -14,6 +14,7 @@ import Profile from './components/Account/Profile';
 import Test from './components/Test';
 import Forgot from './components/Account/Forgot';
 import Reset from './components/Account/Reset';
+import Notifications from './components/Account/Notifications';
 
 export default function getRoutes(store) {
   const ensureAuthenticated = (nextState, replace) => {
@@ -35,6 +36,7 @@ export default function getRoutes(store) {
     <Route path="/" component={App}>
       <IndexRoute component={Login} onLeave={clearMessages}/>
       <Route path="/home" component={Home} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
+      <Route path="/notifications" component={Notifications} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
       <Route path="/contact" component={Contact} onLeave={clearMessages}/>
       <Route path="/login" component={Login} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
       <Route path="/signup" component={Signup} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>

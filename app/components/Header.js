@@ -27,6 +27,8 @@ class Header extends React.Component {
             <li className="divider"></li>
             <li><Link href={`/user/${this.props.user.username}`}>Profile</Link></li>
             <li className="divider"></li>
+            <li><Link href={`/notifications`}>Notifications</Link></li>
+            <li className="divider"></li>
             <li><a href="#" onClick={this.handleLogout.bind(this)}>Logout</a></li>
           </ul>
         </li>

@@ -8,14 +8,44 @@ class Notifications extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user:props.user
+      user:props.user,
+      notifications:[]
     };
   }
   componentDidMount() {
     let promise = this.props.dispatch(getNotifications(this.state.user._id));
     promise.then((json) => {
-      console.log(json);
+      this.setState({
+        notifications:json.notifications != null ? json.notifications : []
+      });
     })
+  }
+  renderNotifications(){
+    let notifications = [];
+    if(this.state.notifications.length > 0){
+      let key = 0;
+      this.state.notifications.forEach((notification) => {
+        let link = `/getCatalogue/${notification.catalogue}`;
+        notifications.push(
+          <div className="col-sm-12" key={`pdiv${key}`}>
+            <Link to={link} className="notification-catalogue-link">
+              <div className="notification-container">
+                <p><strong>{notification.message}</strong></p>
+                <p className="notification-date">{new Date(notification.createdAt).toDateString()}</p>
+              </div>
+            </Link>
+          </div>
+        );
+        key++;
+      });
+      return notifications;
+    }else{
+      return (
+        <div className="col-lg-12 text-center">
+          <p>Closed on sunday!!</p>
+        </div>
+      );
+    }
   }
   render() {
     return (
@@ -23,7 +53,7 @@ class Notifications extends React.Component {
         <div className="panel">
           <div className="panel-body">
             <Messages messages={this.props.messages}/>
-            <h1>Notifications</h1>
+            {this.renderNotifications()}
           </div>
         </div>
       </div>

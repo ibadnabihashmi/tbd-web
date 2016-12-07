@@ -493,3 +493,23 @@ textarea {
   z-index: 99999;
   background-color: white;
 }
+.notification-container {
+  background-color: white;
+  border: solid 1px rgb(220, 220, 220) !important;
+  padding: 10px 10px;
+  cursor: pointer;
+  transition: all .5s;
+}
+.notification-container:hover {
+  background-color: #262626;
+  color: white;
+}
+.notification-date {
+  font-size: 12px;
+}
+.notification-catalogue-link{
+  color: #262626;
+}
+.notification-catalogue-link:hover{
+  color: #262626;
+}

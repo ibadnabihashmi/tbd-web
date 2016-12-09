@@ -2,6 +2,7 @@ import React from 'react';
 import { IndexLink, Link } from 'react-router';
 import { connect } from 'react-redux'
 import { logout } from '../actions/auth';
+import { getUnreadNotifications } from '../actions/notifications';
 
 class Header extends React.Component {
   constructor(props) {
@@ -11,6 +12,12 @@ class Header extends React.Component {
   handleLogout(event) {
     event.preventDefault();
     this.props.dispatch(logout());
+  }
+
+  componentDidMount() {
+    if(this.props.token){
+      this.props.dispatch(getUnreadNotifications(this.props.user._id));
+    }
   }
 
   render() {
@@ -25,9 +32,9 @@ class Header extends React.Component {
           <ul className="dropdown-menu">
             <li><Link to="/account">My Account</Link></li>
             <li className="divider"></li>
-            <li><Link href={`/user/${this.props.user.username}`}>Profile</Link></li>
+            <li><Link to={`/user/${this.props.user.username}`}>Profile</Link></li>
             <li className="divider"></li>
-            <li><Link href={`/notifications`}>Notifications</Link></li>
+            <li><Link to={`/notifications`}>Notifications({this.props.notifications})</Link></li>
             <li className="divider"></li>
             <li><a href="#" onClick={this.handleLogout.bind(this)}>Logout</a></li>
           </ul>
@@ -60,7 +67,8 @@ class Header extends React.Component {
 const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
-    user: state.auth.user
+    user: state.auth.user,
+    notifications: state.auth.notifications
   };
 };
 

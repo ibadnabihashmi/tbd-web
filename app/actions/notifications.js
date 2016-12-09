@@ -15,3 +15,29 @@ export function getNotifications(userId) {
     })
   };
 }
+
+export function getUnreadNotifications(userId) {
+  return (dispatch) => {
+    dispatch({
+      type:'CLEAR_MESSAGES'
+    });
+    return fetch(`http://localhost:3002/api/notification/getUnreadNotifications?userId=${userId}`,{
+      method:'get',
+      headers: { 'Content-Type':'application/json' }
+    }).then((response) => {
+      if(response.ok){
+        response.json().then((json) => {
+          dispatch({
+            type: 'UPDATE_NOTIFICATIONS',
+            notifications: json.notifications
+          });
+        });
+      }else{
+        dispatch({
+          type: 'UPDATE_NOTIFICATIONS',
+          notifications: ''
+        });
+      }
+    })
+  };
+}

@@ -80,7 +80,7 @@ if (app.get('env') === 'development') {
 // React server rendering
 app.use(function(req, res) {
   var initialState = {
-    auth: { token: req.cookies.token, user: req.user },
+    auth: { token: req.cookies.token, user: req.user ,notifications: '' },
     messages: {}
   };
 

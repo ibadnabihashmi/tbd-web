@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Messages from '../Messages';
 import { updateCatalogue, fetchCatalogueDetails } from '../../actions/catalogue';
 import Lightbox from 'react-images';
+import { Link } from 'react-router';
 
 class CatalogueDetail extends React.Component {
     constructor(props){
@@ -111,11 +112,11 @@ class CatalogueDetail extends React.Component {
         this.state.catalogueTags.split(' ').forEach((tag) => {
             const tagLink = `http://localhost:3001/tags/${tag}`;
             tags.push(
-                <a href={tagLink} key={key+"a"}>
+                <Link to={tagLink} key={key+"a"}>
                     <h4 className="tag" key={key}>
                         #{tag}
                     </h4>
-                </a>
+                </Link>
             );
             key++;
         });

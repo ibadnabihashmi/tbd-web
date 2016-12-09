@@ -1,6 +1,7 @@
 const initialState = {
   token: null,
-  user: {}
+  user: {},
+  notifications: ''
 };
 
 export default function auth(state = initialState, action) {
@@ -15,6 +16,9 @@ export default function auth(state = initialState, action) {
         token: action.token,
         user: action.user
       });
+    case 'UPDATE_NOTIFICATIONS':
+      state.notifications = action.notifications;
+      return state;
     case 'LOGOUT_SUCCESS':
       return initialState;
     default:

@@ -25,13 +25,20 @@ class Notifications extends React.Component {
     if(this.state.notifications.length > 0){
       let key = 0;
       this.state.notifications.forEach((notification) => {
-        let link = `/getCatalogue/${notification.catalogue}`;
+        let link = `/getCatalogue/${notification.catalogue._id}`;
+        let image = `http://localhost:3000${notification.catalogue.images[0]}`;
+        const imageStyle = {
+          'width': '83px',
+          'float': 'right',
+          'marginTop': '-61px'
+        };
         notifications.push(
           <div className="col-sm-12" key={`pdiv${key}`}>
             <Link to={link} className="notification-catalogue-link">
               <div className="notification-container">
                 <p><strong>{notification.message}</strong></p>
                 <p className="notification-date">{new Date(notification.createdAt).toDateString()}</p>
+                <img src={image} style={imageStyle}/>
               </div>
             </Link>
           </div>

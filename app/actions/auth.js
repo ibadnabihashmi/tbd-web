@@ -18,6 +18,10 @@ export function login(email, password) {
       if (response.ok) {
         return response.json().then((json) => {
           dispatch({
+            type: 'UPDATE_NOTIFICATIONS',
+            notifications: '1'
+          });
+          dispatch({
             type: 'LOGIN_SUCCESS',
             token: json.token,
             user: json.user

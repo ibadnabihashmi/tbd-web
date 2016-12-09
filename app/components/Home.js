@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Messages from './Messages';
 import { fetchFeed } from '../actions/home';
 import { browserHistory } from 'react-router';
+var Slider = require('react-slick');
 
 class Home extends React.Component {
   constructor(props) {
@@ -31,6 +32,14 @@ class Home extends React.Component {
         width:'100%'
       };
       let key = 0;
+      const settings = {
+        dots: false,
+        infinite: true,
+        fade: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      };
       this.state.catalogues.forEach((catalogue) => {
         cats.push(
           <div className="feed-element" key={`key1_${key}`}>
@@ -38,7 +47,14 @@ class Home extends React.Component {
               <span className="feed-element-name" onClick={this.goToUser.bind(this,catalogue.user.name)}>{catalogue.user.name}</span>
               <span className="feed-element-price">${catalogue.price}</span>
             </div>
-            <img src={`http://localhost:3000${catalogue.images[0]}`} style={imageStyle} key={`key2_${key}`}/>
+            <div>
+              <Slider {...settings}>
+                <img src={`http://localhost:3000${catalogue.images[0]}`} style={imageStyle} key={`key_image1_${key}`}/>
+                <img src={`http://localhost:3000${catalogue.images[1]}`} style={imageStyle} key={`key_image2_${key}`}/>
+                <img src={`http://localhost:3000${catalogue.images[2]}`} style={imageStyle} key={`key_image3_${key}`}/>
+                <img src={`http://localhost:3000${catalogue.images[3]}`} style={imageStyle} key={`key_image4_${key}`}/>
+              </Slider>
+            </div>
             <div>
               <h4 onClick={this.goToCatalogue.bind(this,catalogue._id)} className="feed-element-cat-name">{catalogue.name}</h4>
               <p>{catalogue.description}</p>

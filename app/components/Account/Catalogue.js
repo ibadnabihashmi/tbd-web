@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUserCatalogues } from '../../actions/catalogue';
 import { follow, unfollow } from '../../actions/account';
+import { getUnreadNotifications } from '../../actions/notifications';
 import { Link } from 'react-router';
 
 class Catalogue extends React.Component {
@@ -34,7 +35,7 @@ class Catalogue extends React.Component {
             }
             this.renderCatalogues();
         });
-
+        this.props.dispatch(getUnreadNotifications(this.state.user1._id));
     }
     follow(){
         this.props.dispatch(follow(this.state.user1._id,this.state.user2._id));

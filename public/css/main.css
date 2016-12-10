@@ -494,6 +494,7 @@ textarea {
   background-color: white;
 }
 .notification-container {
+  margin: 5px 0px;
   background-color: white;
   border: solid 1px rgb(220, 220, 220) !important;
   padding: 10px 10px;
@@ -512,4 +513,10 @@ textarea {
 }
 .notification-catalogue-link:hover{
   color: #262626;
+}
+.slick-list {
+  margin-top: 25px !important;
+}
+.slick-arrow {
+  display: none !important;
 }

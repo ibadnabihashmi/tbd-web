@@ -41,3 +41,31 @@ export function getUnreadNotifications(userId) {
     })
   };
 }
+
+export function markNotificationRead(notificationId) {
+  return ((dispatch) => {
+    dispatch({
+      type:'CLEAR_MESSAGES'
+    });
+    return fetch('http://localhost:3002/api/notification/markNotificationRead',{
+      headers: {'Content-type':'Application/json'},
+      method: 'post',
+      body: JSON.stringify({
+        notificationId: notificationId
+      })
+    }).then((response) => {
+      if(response.ok){
+        dispatch({
+          type: 'DEC_NOTIFICATIONS',
+          notifications: 1
+        });
+      }else{
+        dispatch({
+          type: 'DEC_NOTIFICATIONS',
+          notifications: 0
+        });
+      }
+      return;
+    });
+  })
+}

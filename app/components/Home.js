@@ -19,10 +19,23 @@ class Home extends React.Component {
     this.goToUser = this.goToUser.bind(this);
     this.goToCatalogue= this.goToCatalogue.bind(this);
   }
-  goToUser(name){
+  loadMore() {
+    this.setState({
+      from: this.state.to,
+      to: Number(this.state.to) - 18000000
+    });
+    let result = this.props.dispatch(fetchFeed(this.state.user._id,this.state.from,this.state.to));
+    result.then((json) => {
+      console.log(json);
+      this.setState({
+        catalogues:this.state.catalogues.concat(json.catalogues)
+      });
+    });
+  }
+  goToUser(name) {
     browserHistory.push(`/user/${name}`);
   }
-  goToCatalogue(id){
+  goToCatalogue(id) {
     browserHistory.push(`/getCatalogue/${id}`);
   }
   getCatalogues() {
@@ -38,7 +51,8 @@ class Home extends React.Component {
         fade: true,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        autoplay: true
       };
       this.state.catalogues.forEach((catalogue) => {
         cats.push(
@@ -89,6 +103,7 @@ class Home extends React.Component {
             <div className="col-sm-10 col-sm-offset-1">
               {this.getCatalogues()}
             </div>
+            <button className="btn tbd-btn width-100" onClick={this.loadMore.bind(this)}>Load more</button>
           </div>
         </div>
       </div>

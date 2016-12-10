@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import Messages from '../Messages';
-import { getNotifications } from '../../actions/notifications'; 
+import { getNotifications ,markNotificationRead } from '../../actions/notifications';
 
 class Notifications extends React.Component {
   constructor(props) {
@@ -11,6 +11,10 @@ class Notifications extends React.Component {
       user:props.user,
       notifications:[]
     };
+  }
+  markNotificationRead(notificationId,catalogueId) {
+    this.props.dispatch(markNotificationRead(notificationId));
+    browserHistory.push(`/getCatalogue/${catalogueId}`);
   }
   componentDidMount() {
     let promise = this.props.dispatch(getNotifications(this.state.user._id));
@@ -25,7 +29,6 @@ class Notifications extends React.Component {
     if(this.state.notifications.length > 0){
       let key = 0;
       this.state.notifications.forEach((notification) => {
-        let link = `/getCatalogue/${notification.catalogue._id}`;
         let image = `http://localhost:3000${notification.catalogue.images[0]}`;
         const imageStyle = {
           'width': '83px',
@@ -34,13 +37,11 @@ class Notifications extends React.Component {
         };
         notifications.push(
           <div className="col-sm-12" key={`pdiv${key}`}>
-            <Link to={link} className="notification-catalogue-link">
-              <div className="notification-container">
-                <p><strong>{notification.message}</strong></p>
-                <p className="notification-date">{new Date(notification.createdAt).toDateString()}</p>
-                <img src={image} style={imageStyle}/>
-              </div>
-            </Link>
+            <div className="notification-container" onClick={this.markNotificationRead.bind(this,notification._id,notification.catalogue._id)}>
+              <p><strong>{notification.message}</strong></p>
+              <p className="notification-date">{new Date(notification.createdAt).toDateString()}</p>
+              <img src={image} style={imageStyle}/>
+            </div>
           </div>
         );
         key++;

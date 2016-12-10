@@ -19,6 +19,9 @@ export default function auth(state = initialState, action) {
     case 'UPDATE_NOTIFICATIONS':
       state.notifications = action.notifications;
       return state;
+    case 'DEC_NOTIFICATIONS':
+      state.notifications = String(Number(state.notifications) - action.notifications);
+      return state;
     case 'LOGOUT_SUCCESS':
       return initialState;
     default:

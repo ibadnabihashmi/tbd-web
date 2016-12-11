@@ -23,6 +23,7 @@ export function login(email, password) {
             user: json.user
           });
           cookie.save('token', json.token, { expires: moment().add(1, 'hour').toDate() });
+          cookie.save('user', json.user, { expires: moment().add(1, 'hour').toDate() });
           browserHistory.push(`/user/${json.user.username}`);
         });
       } else {
@@ -54,8 +55,9 @@ export function signup(name, username, email, password) {
             token: json.token,
             user: json.user
           });
-          browserHistory.push(`/user/${json.user.username}`);
           cookie.save('token', json.token, { expires: moment().add(1, 'hour').toDate() });
+          cookie.save('user', json.user, { expires: moment().add(1, 'hour').toDate() });
+          browserHistory.push(`/user/${json.user.username}`);
         } else {
           dispatch({
             type: 'SIGNUP_FAILURE',
@@ -69,6 +71,7 @@ export function signup(name, username, email, password) {
 
 export function logout() {
   cookie.remove('token');
+  cookie.remove('user');
   browserHistory.push('/');
   return {
     type: 'LOGOUT_SUCCESS'

@@ -32,6 +32,7 @@ class Notifications extends React.Component {
         let image = `http://localhost:3000${notification.catalogue.images[0]}`;
         const imageStyle = {
           'width': '83px',
+          'height': '63px',
           'float': 'right',
           'marginTop': '-61px'
         };

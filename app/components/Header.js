@@ -21,24 +21,18 @@ class Header extends React.Component {
   }
 
   render() {
-    const active = { borderBottomColor: '#3f51b5' };
+    const active = { borderBottomColor: 'black' };
+    const leftNav = this.props.token ? (
+        <ul className="nav navbar-nav">
+          <li><Link to="/home" activeStyle={active}>Home</Link></li>
+          <li><Link href={`/user/${this.props.user.username}`} activeStyle={active}>Profile</Link></li>
+          <li><Link to={`/notifications`} activeStyle={active}>Notifications({this.props.notifications})</Link></li>
+        </ul>
+    ) : null;
     const rightNav = this.props.token ? (
       <ul className="nav navbar-nav navbar-right">
-        <li className="dropdown">
-          <a href="#" data-toggle="dropdown" className="navbar-avatar dropdown-toggle">
-            {this.props.user.username || this.props.user.email || this.props.user.id}{' '}
-            <i className="caret"></i>
-          </a>
-          <ul className="dropdown-menu">
-            <li><Link to="/account">My Account</Link></li>
-            <li className="divider"></li>
-            <li><Link to={`/user/${this.props.user.username}`}>Profile</Link></li>
-            <li className="divider"></li>
-            <li><Link to={`/notifications`}>Notifications({this.props.notifications})</Link></li>
-            <li className="divider"></li>
-            <li><a href="#" onClick={this.handleLogout.bind(this)}>Logout</a></li>
-          </ul>
-        </li>
+        <li><Link to="/account" activeStyle={active}>My Account</Link></li>
+        <li><a href="#" onClick={this.handleLogout.bind(this)}>Logout</a></li>
       </ul>
     ) : (
       <ul className="nav navbar-nav navbar-right">
@@ -53,9 +47,7 @@ class Header extends React.Component {
             <h2 className="navbar-brand header-main-title">{ this.props.token ? this.props.user.name : 'TBD'}</h2>
           </div>
           <div id="navbar" className="navbar-collapse collapse">
-            <ul className="nav navbar-nav">
-              <li><Link to="/home" activeStyle={active}>Home</Link></li>
-            </ul>
+            {leftNav}
             {rightNav}
           </div>
         </div>

@@ -92,6 +92,7 @@ class CatalogueDetail extends React.Component {
         let key = 0;
         this.state.images.forEach((image) => {
             var style = {
+                backgroundSize: 'cover',
                 backgroundImage:"url('"+image.src+"')"
             };
             images.push(

@@ -101,7 +101,7 @@ footer {
 }
 
 .navbar-default .navbar-nav > li.active > a {
-  border-bottom-color: #3f51b5;
+  border-bottom-color: black !important;
   background-color: transparent;
   color: #262626;
 }
@@ -319,8 +319,7 @@ textarea {
 }
 .catalogue-add-btn {
   border: 3px solid #383838;
-  padding: 125px 0px;
-  background-color: #efefef;
+  height: 300px;
   width: 31.333333%;
   margin: 10px 10px;
 }
@@ -519,4 +518,14 @@ textarea {
 }
 .slick-arrow {
   display: none !important;
+}
+.caption {
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
+  /* margin-top: 10px; */
+  background-color: rgba(0, 0, 0, 0.52);
+  padding: 15px 0px;
+  color: white;
 }

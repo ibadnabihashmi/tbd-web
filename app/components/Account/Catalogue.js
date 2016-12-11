@@ -66,11 +66,17 @@ class Catalogue extends React.Component {
         let key = 0;
         if(this.state.user2.catalogues.length > 0){
             this.state.user2.catalogues.forEach((catalogue) => {
+                let catBackground = {
+                    backgroundSize: 'cover',
+                    backgroundImage:"url('http://localhost:3000"+catalogue.images[0]+"')",
+                };
                 const link = `/getCatalogue/${catalogue._id}`;
                 cats.push(
                     <Link to={link} className="tbd-catalogue-btn" key={key}>
-                        <div className="col-md-4 text-center catalogue-add-btn" key={key+"_div"}>
-                            {catalogue.name}
+                        <div className="col-md-4 text-center catalogue-add-btn" key={key+"_div"} style={catBackground}>
+                            <div className="caption">
+                                <h3>{catalogue.name}</h3>
+                            </div>
                         </div>
                     </Link>
                 );
@@ -80,7 +86,9 @@ class Catalogue extends React.Component {
                 cats.push(
                     <Link to="/addCatalogue" className="tbd-catalogue-btn" key={key}>
                         <div className="col-md-4 text-center catalogue-add-btn" key={key+"_div"}>
-                            add catalogue +
+                            <div className="caption">
+                                <h3>add catalogue +</h3>
+                            </div>
                         </div>
                     </Link>
                 );
@@ -91,7 +99,9 @@ class Catalogue extends React.Component {
                 return (
                   <Link href="/addCatalogue" className="tbd-catalogue-btn">
                       <div className="col-md-4 text-center catalogue-add-btn">
-                          add catalogue +
+                          <div className="caption">
+                              <h3>add catalogue +</h3>
+                          </div>
                       </div>
                   </Link>
                 );

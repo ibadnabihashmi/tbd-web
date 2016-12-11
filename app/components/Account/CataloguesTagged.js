@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCataloguesByTag } from '../../actions/catalogue';
+import { Link } from 'react-router';
 
 class CataloguesTagged extends React.Component {
     constructor(props){
@@ -23,14 +24,21 @@ class CataloguesTagged extends React.Component {
         let key = 0;
         if(this.state.catalogues.length > 0){
             this.state.catalogues.forEach((catalogue) => {
+                let catBackground = {
+                    backgroundSize: 'cover',
+                    backgroundImage:"url('http://localhost:3000"+catalogue.images[0]+"')",
+                };
                 const link = `/getCatalogue/${catalogue._id}`;
                 cats.push(
-                    <a href={link} className="tbd-catalogue-btn" key={key}>
-                        <div className="col-md-4 text-center catalogue-add-btn" key={key+"_div"}>
-                            {catalogue.name}
+                    <Link href={link} className="tbd-catalogue-btn" key={key}>
+                        <div className="col-md-4 text-center catalogue-add-btn" key={key+"_div"} style={catBackground}>
+                            <div className="caption">
+                                <h3>{catalogue.name}</h3>
+                            </div>
                         </div>
-                    </a>
+                    </Link>
                 );
+                key++;
             });
             return cats;
         }else{

@@ -8,8 +8,8 @@ import { browserHistory } from 'react-router';
 export function facebookLogin() {
   const facebook = {
     url: 'http://localhost:3000/api/auth/facebook',
-    clientId: '980220002068787',
-    redirectUri: 'http://localhost:3000/api/auth/facebook/callback',
+    clientId: '1648667765160435',
+    redirectUri: 'http://localhost:3001/auth/facebook/callback',
     authorizationUrl: 'https://www.facebook.com/v2.5/dialog/oauth',
     scope: 'email,user_location',
     width: 580,
@@ -244,7 +244,8 @@ function signIn({ token, user, window, interval, dispatch }) {
       user: user
     });
     cookie.save('token', token, { expires: moment().add(1, 'hour').toDate() });
-    browserHistory.push('/');
+    cookie.save('user', user, { expires: moment().add(1, 'hour').toDate() });
+    browserHistory.push('/account');
     resolve({ window: window, interval: interval });
   });
 

@@ -16,7 +16,8 @@ class Profile extends React.Component {
             location: props.user.location,
             website: props.user.website,
             gravatar: props.user.gravatar,
-            picture: props.user.picture?'http://localhost:3000/'+props.user.picture:undefined,
+            picture: props.user.socialAuthPic?props.user.socialAuthPic:
+            props.user.picture?'http://localhost:3000/'+props.user.picture:undefined,
             password: '',
             confirm: ''
         };

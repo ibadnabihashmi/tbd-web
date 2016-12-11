@@ -26,7 +26,8 @@ class Catalogue extends React.Component {
         let result = this.props.dispatch(fetchUserCatalogues(this.state.username));
         result.then((json) => {
             json.user.catalogues = json.catalogues;
-            json.user.picture = json.user.picture?'http://localhost:3000'+json.user.picture:undefined;
+            json.user.picture = json.user.socialAuthPic?json.user.socialAuthPic:
+                json.user.picture?'http://localhost:3000'+json.user.picture:undefined;
             this.setState({
                 user2:json.user
             });

@@ -11,6 +11,7 @@ import AddCatalogue from './components/Account/AddCatalogue';
 import CataloguesTagged from './components/Account/CataloguesTagged';
 import Signup from './components/Account/Signup';
 import Profile from './components/Account/Profile';
+import SetUsername from './components/Account/SetUsername';
 import Test from './components/Test';
 import Forgot from './components/Account/Forgot';
 import Reset from './components/Account/Reset';
@@ -20,6 +21,11 @@ export default function getRoutes(store) {
   const ensureAuthenticated = (nextState, replace) => {
     if (!store.getState().auth.token) {
       replace('/login');
+    }
+    if(store.getState().auth.user.username === undefined){
+        if(nextState.location.pathname !== '/setUsername'){
+            replace('/setUsername');
+        }
     }
   };
   const skipIfAuthenticated = (nextState, replace) => {
@@ -41,6 +47,7 @@ export default function getRoutes(store) {
       <Route path="/login" component={Login} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
       <Route path="/signup" component={Signup} onEnter={skipIfAuthenticated} onLeave={clearMessages}/>
       <Route path="/account" component={Profile} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
+      <Route path="/setUsername" component={SetUsername} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
       <Route path="/user/:username" component={Catalogue} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
       <Route path="/getCatalogue/:catalogueId" component={CatalogueDetail} onEnter={ensureAuthenticated} onLeave={clearMessages}/>
       <Route path="/tags/:tag" component={CataloguesTagged} onEnter={ensureAuthenticated} onLeave={clearMessages}/>

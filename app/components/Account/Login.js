@@ -54,14 +54,11 @@ class Login extends React.Component {
               <div className="form-group">
                 <input type="password" name="password" id="password" placeholder="Password" className="form-control" value={this.state.password} onChange={this.handleChange.bind(this)}/>
               </div>
-              <div className="form-group"><Link to="/forgot">Forgot your password?</Link></div>
               <button type="submit" className="btn btn-success">Log in</button>
             </form>
             <div className="hr-title"><span>or</span></div>
             <div className="btn-toolbar text-center">
         <button onClick={this.handleFacebook.bind(this)} className="btn btn-facebook">Sign in with Facebook</button>
-        <button onClick={this.handleTwitter.bind(this)} className="btn btn-twitter">Sign in with Twitter</button>
-        <button onClick={this.handleGoogle.bind(this)} className="btn btn-google">Sign in with Google</button>
             </div>
           </div>
         </div>

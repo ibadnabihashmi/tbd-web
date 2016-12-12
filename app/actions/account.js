@@ -1,4 +1,7 @@
 import request from 'superagent';
+import { browserHistory } from 'react-router';
+import moment from 'moment';
+import cookie from 'react-cookie';
 
 export function updateProfile(state, token) {
     return (dispatch) => {
@@ -94,6 +97,48 @@ export function saveTag(tag,userId) {
             }
         });
     }
+}
+
+export function setUsername(username,userId,token) {
+    return (dispatch) => {
+        dispatch({
+            type: 'CLEAR_MESSAGES'
+        });
+        return fetch('http://localhost:3000/api/user/setUsername', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username,
+                userId: userId
+            })
+        }).then((response) => {
+            if (response.ok) {
+                return response.json().then((json) => {
+                    cookie.remove('user');
+                    dispatch({
+                        type: 'USERNAME_SUCCESSFULL',
+                        messages: [json]
+                    });
+                    dispatch({
+                        type: 'USERNAME_CHANGE_SUCCESSFULL',
+                        token: token,
+                        user: json.user
+                    });
+                    cookie.save('user', json.user, { expires: moment().add(1, 'hour').toDate() });
+                    browserHistory.push('/account');
+                });
+            } else {
+                return response.json().then((json) => {
+                    dispatch({
+                        type: 'USERNAME_UNSUCCESSFULL',
+                        messages: [json]
+                    });
+                });
+            }
+        });
+    };
 }
 
 export function updatePicture(image,userId) {

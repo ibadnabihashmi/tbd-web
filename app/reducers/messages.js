@@ -11,6 +11,7 @@ export default function messages(state = {}, action) {
     case 'UNLINK_FAILURE':
     case 'LINK_FAILURE':
     case 'CATALOGUE_UPDATED_FAILURE':
+    case 'USERNAME_UNSUCCESSFULL':
       return {
         error: action.messages
       };
@@ -19,6 +20,7 @@ export default function messages(state = {}, action) {
     case 'RESET_PASSWORD_SUCCESS':
     case 'CONTACT_FORM_SUCCESS':
     case 'CATALOGUE_UPDATED_SUCCESS':
+    case 'USERNAME_SUCCESSFULL':
       return {
         success: action.messages
       };

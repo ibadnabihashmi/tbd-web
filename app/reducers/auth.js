@@ -12,6 +12,7 @@ export default function auth(state = initialState, action) {
     case 'LOGIN_SUCCESS':
     case 'SIGNUP_SUCCESS':
     case 'OAUTH_SUCCESS':
+    case 'USERNAME_CHANGE_SUCCESSFULL':
       return Object.assign({}, state, {
         token: action.token,
         user: action.user

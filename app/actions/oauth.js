@@ -245,7 +245,11 @@ function signIn({ token, user, window, interval, dispatch }) {
     });
     cookie.save('token', token, { expires: moment().add(1, 'hour').toDate() });
     cookie.save('user', user, { expires: moment().add(1, 'hour').toDate() });
-    browserHistory.push('/account');
+    if(user.username !== undefined){
+      browserHistory.push(`/user/${user.username}`);
+    }else{
+      browserHistory.push('/setUsername');
+    }
     resolve({ window: window, interval: interval });
   });
 

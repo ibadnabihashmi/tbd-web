@@ -123,11 +123,11 @@ class Catalogue extends React.Component {
         }else{
             const headerName = this.state.user2.followers.indexOf(this.state.user1._id) != -1 ? (
               <div className={`${clazz } imfollowing`}>
-                  <h3 className="text-center">{this.state.user2.name} <span onClick={this.unfollow}>-</span></h3>
+                  <h3 className="text-center">unfollow <span onClick={this.unfollow}>-</span></h3>
               </div>
             ) : (
               <div className={clazz}>
-                  <h3 className="text-center">{this.state.user2.name} <span onClick={this.follow}>+</span></h3>
+                  <h3 className="text-center">follow <span onClick={this.follow}>+</span></h3>
               </div>
             );
             return headerName;

@@ -105,12 +105,6 @@ class Profile extends React.Component {
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="username" className="col-sm-3">Username</label>
-                                <div className="col-sm-7">
-                                    <input type="text" name="username" id="username" className="form-control" value={this.state.username} onChange={this.handleChange.bind(this)}/>
-                                </div>
-                            </div>
-                            <div className="form-group">
                                 <label className="col-sm-3">Gender</label>
                                 <div className="col-sm-4">
                                     <label className="radio-inline radio col-sm-4">

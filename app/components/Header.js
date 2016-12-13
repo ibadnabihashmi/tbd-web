@@ -26,11 +26,12 @@ class Header extends React.Component {
         <ul className="nav navbar-nav">
           <li><Link to="/home" activeStyle={active}>Home</Link></li>
           <li><Link to={`/user/${this.props.user.username}`} activeStyle={active}>Profile</Link></li>
-          <li><Link to={`/notifications`} activeStyle={active}>Notifications({this.props.notifications})</Link></li>
+          <li><Link activeStyle={active}>Explore</Link></li>
         </ul>
     ) : null;
     const rightNav = this.props.token ? (
       <ul className="nav navbar-nav navbar-right">
+        <li><Link to={`/notifications`} activeStyle={active}>Notifications({this.props.notifications})</Link></li>
         <li><Link to="/account" activeStyle={active}>My Account</Link></li>
         <li><a href="#" onClick={this.handleLogout.bind(this)}>Logout</a></li>
       </ul>

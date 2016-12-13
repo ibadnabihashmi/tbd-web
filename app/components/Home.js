@@ -29,8 +29,8 @@ class Home extends React.Component {
       console.log(json);
       this.setState({
         catalogues:this.state.catalogues.concat(json.catalogues),
-        from: Number(json.from),
-        to: Number(json.to)
+        from: Number(json.to),
+        to: Number(json.from)
       });
     });
   }
@@ -93,8 +93,8 @@ class Home extends React.Component {
       console.log(json);
       this.setState({
         catalogues:json.catalogues,
-        from: Number(json.from),
-        to: Number(json.to)
+        from: Number(json.to),
+        to: Number(json.from)
       });
     });
   }
